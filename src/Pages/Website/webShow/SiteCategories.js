@@ -1,0 +1,56 @@
+import React, { useState, useEffect } from "react";
+import { Axios } from "../../../Api/Axios.js";
+import { Col, Row } from "react-bootstrap";
+import { Link, NavLink } from "react-router-dom";
+export default function SiteCategories() {
+  const [allCategories, setAllCategories] = useState([]);
+  const [query, setQuery] = useState(""); 
+
+  // get categories using filter 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await Axios.get(`/webSite/all?filter[item]=${query}`);
+        setAllCategories(response.data);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+    fetchData();
+  }, [query]);
+  
+  // show
+  const ShowCategories = allCategories.map((category) => (
+    <Col lg={3} key={category.id}>
+      <NavLink to={`/NavBar/categoryProducts/${category.id}`}>
+        <div className="card mb-4 shadow">
+          <Link to={`/NavBar/categoryProducts/${category.id}`}>
+            <img
+              src={category.image}
+              alt={category.title}
+              className="card-img-top img-fluid"
+              style={{ height: "300px", objectFit: "cover" }}
+            />
+          </Link>
+          <div className="card-body">
+            <h5 className="card-title">{category.title}</h5>
+          </div>
+        </div>
+      </NavLink>
+    </Col>
+  ));
+
+  return (
+    <>
+      <h1>Categories</h1>
+      <input
+        type="text"
+        className="form-control w-50 m-3"
+        placeholder="Search categories..."
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
+      <Row>{ShowCategories}</Row>
+    </>
+  );
+}

@@ -1,0 +1,106 @@
+/* top bar */
+.NavBar {
+ 
+  height: 70px;
+  padding: 0 20px;
+  z-index: 2;
+}
+
+
+.footer {
+  background-color: #222020; /* Adjust the background color as needed */
+  color: white; /* Adjust the text color as needed */
+  padding: 10px;
+
+  width: 100%;
+
+}
+.scroll-to-top-btn {
+  position: fixed;
+  bottom: 60px;
+  right: 20px;
+  display: none;
+}
+
+.scroll-to-top-btn.visible {
+  display: block;
+}
+
+.scrollable-dropdown {
+  max-height: 300px; /* Set your preferred max height */
+  overflow-y: auto;
+}
+
+
+
+
+
+/*  */
+/* Navbar.css */
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  color: white;
+}
+
+.sidebar.open {
+  width: 250px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 18px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #818181;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  font-size: 30px;
+  margin-left: 50px;
+  color: #818181;
+  background-color: transparent;
+  border: none;
+}
+
+.close-btn:hover {
+  color: #fff;
+}
+
+@media screen and (max-height: 450px) {
+  .sidebar {
+    padding-top: 15px;
+  }
+  .sidebar a {
+    font-size: 18px;
+  }
+}
+.sidebar {
+  /* Your existing styles */
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar.close {
+  transform: translateX(-100%);
+}
