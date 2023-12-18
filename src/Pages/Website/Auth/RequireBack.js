@@ -7,11 +7,15 @@ export default function RequireBack() {
   const cookie = Cookie();
   const token = cookie.get("e-commerce");
   const [isAuth, setIsAuth] = useState();
+  const [isFinished, setIsFinished] = useState();
   useEffect(() => {
     Axios.get("/isAuthExist")
-      .then((data) => setIsAuth(data.data))
+      .then((data) => {
+        setIsAuth(data.data);
+        setIsFinished(true);
+      })
       .catch((err) => console.log(err));
-  },[]);
+  }, []);
   // get the last location (pathname)
-  return token && isAuth ? window.history.back() : <Outlet />;
+  return token && isAuth ? window.history.back() : isFinished && <Outlet />;
 }

@@ -12,7 +12,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDeleteLeft, faEdit } from "@fortawesome/free-solid-svg-icons";
 
-export default function Orders() {
+export default function WebSiteOrders() {
   const [orders, setOrders] = useState([]);
   const [openOrder, setOpenOrder] = useState(null);
   const [isGetOrders, setIsGetOrders] = useState(false);
@@ -23,7 +23,11 @@ export default function Orders() {
   const [showModal, setShowModal] = useState(false);
   const [IsEdit, setIsEdit] = useState(0);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
-
+  const handleDeleteConfirmation = (orderItemId) => {
+    setId(orderItemId);
+    setShowDeleteConfirmation(true);
+  };
+  const handleDeleteClose = () => setShowDeleteConfirmation(false);
   const handleModalShow = (orderItem) => {
     setId(orderItem.id);
     setNote(orderItem.note);
@@ -31,11 +35,7 @@ export default function Orders() {
     setStatus(orderItem.status);
     setShowModal(true);
   };
-  const handleDeleteConfirmation = (orderItemId) => {
-    setId(orderItemId);
-    setShowDeleteConfirmation(true);
-  };
-  const handleDeleteClose = () => setShowDeleteConfirmation(false);
+ 
 
   useEffect(() => {
     Axios.get("/webSite/orders/index")
@@ -89,6 +89,7 @@ export default function Orders() {
             >
               <h3>Order #{order.id}</h3>
               <p>Status: {order.status}</p>
+              <p>note: {order.note}</p>
               <p>total_price: {order.total_price}</p>
             </div>
             {openOrder === order.id && (

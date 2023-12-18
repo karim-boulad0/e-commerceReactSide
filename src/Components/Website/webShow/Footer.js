@@ -50,7 +50,7 @@ export default function Footer() {
         </Col>
       </Row>
       <hr />
-      <Form>
+      <Form className="bg-dark">
         <Row id="down">
           <Col md={2}></Col>
           <Col md={2}>

@@ -50,6 +50,12 @@ export const NavLinks = [
     icon: faSquarePlus,
     role: ["1995", "1999"],
   },
+  {
+    name: "Orders",
+    to: "orders",
+    icon: faSheetPlastic,
+    role: ["1995"],
+  },
 
 
   {

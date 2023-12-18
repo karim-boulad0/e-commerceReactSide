@@ -200,12 +200,12 @@ export default function TopNavBar() {
             </NavDropdown.Item>
           )}
           <NavDropdown.Item>
-            <Link className="nav-link" to={"#"}>
+            <Link className="nav-link" to={"/NavBar/orders"}>
               orders
             </Link>
           </NavDropdown.Item>
           <NavDropdown.Item>
-            <Link className="nav-link" to={"#"}>
+            <Link className="nav-link" to={"carts"}>
               carts
             </Link>
           </NavDropdown.Item>

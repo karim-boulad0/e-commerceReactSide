@@ -30,10 +30,12 @@ import About from "./Pages/Website/webShow/About";
 import Settings from "./Pages/Dashboard/settings/Settings";
 import { useState } from "react";
 import SiteCategories from "./Pages/Website/webShow/SiteCategories";
-import TopNavBar from "./Components/Website/webShow/TopBar";
 import Test from "./Pages/Test";
 import OrderItems from "./Pages/Website/webShow/OrderItems";
-import Orders from "./Pages/Website/webShow/Orders";
+// Assuming these are your two components or modules
+import WebSiteOrders from "./Pages/Website/webShow/Orders";
+import Orders from "./Pages/Dashboard/orders/Orders";
+import Order from "./Pages/Dashboard/orders/Order";
 
 export default function App() {
   const [setting, setSetting] = useState(0);
@@ -44,8 +46,8 @@ export default function App() {
   return (
     <>
       <Routes>
-      {/* <Route element={<Test />} path="/test"></Route> */}
-      <Route element={<Orders />} path="/test"></Route>
+        {/* <Route element={<Test />} path="/test"></Route> */}
+        <Route element={<Order />} path="/test/:id"></Route>
         {/* global  */}
         <Route element={<ForBiden />} path="/dashboard/403"></Route>
         <Route path="/*" element={<ForBiden4 />}></Route>
@@ -57,8 +59,9 @@ export default function App() {
           <Route path="about" element={<About />}></Route>
           <Route path="userDetails" element={<UserDetails />}></Route>
           <Route path="SecondHomePage" element={<SecondHomePage />}></Route>
-          <Route path="orderItems" element={<OrderItems />}></Route>
-          <Route path="orders" element={<Orders />}></Route>
+          <Route path="carts" element={<OrderItems />}></Route>
+          <Route path="orders" element={<WebSiteOrders />}></Route>
+
           {/* categories of website */}
           <Route
             path="categoryProducts/:id"
@@ -81,7 +84,7 @@ export default function App() {
         ></Route>
         {/* protected routes */}
         <Route element={<RequireAuth AllowedRole={["1995", "1996", "1999"]} />}>
-          <Route path="/dashboard" element={<Dashboard setting={setting}  />}>
+          <Route path="/dashboard" element={<Dashboard setting={setting} />}>
             <Route
               path="settings"
               element={<Settings updateSettings={updateSettings} />}
@@ -89,12 +92,14 @@ export default function App() {
             <Route path="userProfile" element={<UserProfile />}></Route>
 
             <Route element={<RequireAuth AllowedRole={["1995"]} />}>
-
               <Route path="users" element={<Users />}></Route>
               <Route path="user/add" element={<AddUser />}></Route>
               <Route path="users/:id" element={<User />}></Route>
             </Route>
-
+            <Route element={<RequireAuth AllowedRole={["1995"]} />}>
+              <Route path="orders" element={<Orders />}></Route>
+              <Route element={<Order />} path="orders/:id"></Route>
+            </Route>
 
             <Route element={<RequireAuth AllowedRole={["1999", "1995"]} />}>
               {/* Categories  */}

@@ -16,30 +16,39 @@ export default function WebsiteProduct() {
   const nav = useNavigate();
   const { id } = useParams();
 
- 
+
   const [quantity, setQuantity] = useState(1);
 
   // add Order item
   async function addOrderItem() {
     try {
+      // Validate quantity to be between 1 and 3
+      if (quantity < 1 || quantity > 3) {
+        console.error("Quantity must be between 1 and 3");
+        return;
+      }
+  
       setDoneCart((prev) => prev + 1);
-      isAuth
-        ? isHasDetails
-          ? await Axios.post(`/webSite/orderItems/addOrderItem/${id}`, {
-              quantity: quantity,
-              note: "done",
-            }).then((data) => {
-              nav("/NavBar/orderItems");
-            })
-          : nav("/NavBar/userDetails")
-        : nav("/login");
+  
+      if (isAuth) {
+        if (isHasDetails) {
+          await Axios.post(`/webSite/orderItems/addOrderItem/${id}`, {
+            quantity: quantity,
+            note: "done",
+          }).then((data) => {
+            nav("/NavBar/carts");
+          });
+        } else {
+          nav("/NavBar/userDetails");
+        }
+      } else {
+        nav("/login");
+      }
     } catch (err) {
-      // if (err.response.status === 401) {
-      //   nav(`/login`);
-      // }
-      console.log(err);
+      console.error(err);
     }
   }
+  
 
   // check user details
   useEffect(() => {
@@ -162,12 +171,15 @@ export default function WebsiteProduct() {
                     <input
                       type="number"
                       value={quantity}
-                      onChange={(e) =>{
-                        setQuantity(parseInt(e.target.value, 10))
-                        console.log(quantity)}
-                      }
+                      onChange={(e) => {
+                        // Use Math.min to ensure the entered value is not greater than 3
+                        setQuantity(Math.min(parseInt(e.target.value, 10), 3));
+                      }}
                       className="w-50"
+                      max={3}
+                      min={1}
                     />
+
                   </Col>
                 </Row>
               </Card.Body>

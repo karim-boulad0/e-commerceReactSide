@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Axios } from "../../../Api/Axios.js";
 import { Col, Row, Carousel, Card } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 
 export default function HomePage() {
   const [categories, setCategories] = useState([]);
@@ -19,27 +21,27 @@ export default function HomePage() {
     };
     fetchData();
   }, []);
-    // get best products
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await Axios.get("/webSite/getBestProducts");
-          setBestProducts(Object.values(response.data));
-          setIsGet(true);
-        } catch (error) {
-          console.error("Error fetching data: ", error);
-        }
-      };
-  
-      fetchData();
-    }, []);
+  // get best products
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await Axios.get("/webSite/getBestProducts");
+        setBestProducts(Object.values(response.data));
+        setIsGet(true);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+
+    fetchData();
+  }, []);
   // show
   const ShowBestProducts = (
     <Row>
       {isGet &&
-        bestProducts.map((product,index) => (
+        bestProducts.map((product, index) => (
           <Col key={index} xs={12} lg={3} md={4} sm={6}>
-            <NavLink to={`/NavBar/product/${product.id}`}>
+            <Link to={`/NavBar/product/${product.id}`}>
               <Card>
                 {product.images.length > 0 && (
                   <Card.Img
@@ -51,30 +53,41 @@ export default function HomePage() {
                   />
                 )}
                 <Card.Body>
-                  <Card.Title>{product.title}</Card.Title>
+                  <Card.Title>{product.title}
+                  <Link to={`/NavBar/product/${product.id}`}>
+
+                    <FontAwesomeIcon
+                      disabled
+                      icon={faCartPlus}
+                      
+                      style={{ cursor: "pointer" }}
+                      className="text-primary fs-3"
+                    />
+                    </Link>
+                  </Card.Title>
                   <Card.Text>{product.description}</Card.Text>
                   <Card.Text>Price: ${product.price}</Card.Text>
                   <Card.Text>Discount: {product.discount}%</Card.Text>
                   {/* Add more details or customize as needed */}
                 </Card.Body>
               </Card>
-            </NavLink>
+            </Link>
           </Col>
         ))}
     </Row>
   );
-  const ShowSixCategories = categories.map((category,index) => (
+  const ShowSixCategories = categories.map((category, index) => (
     <Col lg={3} md={4} sm={7} key={index}>
       <Link to={`/NavBar/categoryProducts/${category.id}`}>
 
         <div className="card mb-2 shadow">
-            
-            <img
-              src={category.image}
-              alt={category.title}
-              className="card-img-top img-fluid"
-              style={{ height: "300px", objectFit: "cover" }}
-            />
+
+          <img
+            src={category.image}
+            alt={category.title}
+            className="card-img-top img-fluid"
+            style={{ height: "300px", objectFit: "cover" }}
+          />
           <div className="card-body">
             <h5 className="card-title">{category.title}</h5>
           </div>
@@ -85,7 +98,7 @@ export default function HomePage() {
   const showSlideCategories = (
     <Row className="mb-5">
       <Carousel style={{ height: "400px" }}>
-        {categories.map((category,index) => (
+        {categories.map((category, index) => (
           <Carousel.Item key={index}>
             <img
               className="d-block w-100"
