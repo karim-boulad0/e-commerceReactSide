@@ -64,4 +64,10 @@ export const NavLinks = [
     icon: faGear,
     role: ["1995"],
   },
+  {
+    name: "Notifications",
+    to: "notifications",
+    icon: faBell,
+    role: ["1995"],
+  },
 ];

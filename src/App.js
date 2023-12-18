@@ -36,6 +36,7 @@ import OrderItems from "./Pages/Website/webShow/OrderItems";
 import WebSiteOrders from "./Pages/Website/webShow/Orders";
 import Orders from "./Pages/Dashboard/orders/Orders";
 import Order from "./Pages/Dashboard/orders/Order";
+import Notifications from "./Pages/Dashboard/notifications/Notifications";
 
 export default function App() {
   const [setting, setSetting] = useState(0);
@@ -47,7 +48,7 @@ export default function App() {
     <>
       <Routes>
         {/* <Route element={<Test />} path="/test"></Route> */}
-        <Route element={<Order />} path="/test/:id"></Route>
+        <Route element={<Notifications />} path="/test"></Route>
         {/* global  */}
         <Route element={<ForBiden />} path="/dashboard/403"></Route>
         <Route path="/*" element={<ForBiden4 />}></Route>
@@ -88,6 +89,10 @@ export default function App() {
             <Route
               path="settings"
               element={<Settings updateSettings={updateSettings} />}
+            ></Route>
+            <Route
+              path="notifications"
+              element={<Notifications  />}
             ></Route>
             <Route path="userProfile" element={<UserProfile />}></Route>
 
