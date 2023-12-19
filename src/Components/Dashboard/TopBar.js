@@ -11,7 +11,7 @@ import { faDrupal } from "@fortawesome/free-brands-svg-icons";
 import moment from "moment";
 import { NavDropdown } from "react-bootstrap";
 
-export default function TopBar({ setting }) {
+export default function TopBar({ setting ,PropNotification}) {
   const menu = useContext(Menu);
   const setIsOpen = menu.setIsOpen;
 
@@ -77,7 +77,7 @@ export default function TopBar({ setting }) {
         setCountUnreadNotifications(data.data);
       })
       .catch((err) => console.log(err));
-  }, [IsAction]);
+  }, [IsAction,PropNotification]);
   // get notifications
   useEffect(() => {
     Axios.get("/dashboard/admin/notification/all")
@@ -87,7 +87,7 @@ export default function TopBar({ setting }) {
         setIsGet(true);
       })
       .catch((err) => console.log(err));
-  }, [IsAction]);
+  }, [IsAction,PropNotification]);
   // show data
   const notificationItems =
     isGet &&

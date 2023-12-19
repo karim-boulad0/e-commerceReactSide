@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 export default function Orders() {
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const [isGet, setIsGet] = useState(false);
   const Header = [
     {
@@ -53,9 +53,7 @@ export default function Orders() {
   const itemsPerPage = 10; // Set the number of items per page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  if (isGet) {
-    const currentData = data.slice(indexOfFirstItem, indexOfLastItem);
-  }
+  const currentData = isGet ? data.slice(indexOfFirstItem, indexOfLastItem) : [];
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
 
@@ -68,7 +66,6 @@ export default function Orders() {
     setShowDeleteConfirmation(false);
     setId(id);
   }
-
   //   delete order
   async function deleteOrder() {
     try {
@@ -84,36 +81,13 @@ export default function Orders() {
     Axios.get(`/dashboard/orders/index?filter[item]=${query}`)
       .then((response) => {
         const dataArray = Object.values(response.data);
-        setData(dataArray); setIsGet(true);
+        setData(dataArray);
+        setIsGet(true);
       })
       .catch((err) => console.log(err));
   }, [query, isDelete]);
   //   map
-  const showTableBody =
-    isGet &&
-    data.map((item, index) => (
-      <tr key={index}>
-        <td>{index}</td>
-        {Header.map((itemHeader, headerIndex) => (
-          <td key={headerIndex}>{item[itemHeader.key]}</td>
-        ))}
-        <td className="d-flex justify-content-between align-items-center">
-          <FontAwesomeIcon
-            icon={faTrash}
-            onClick={() => handleDeleteOpen(item.id)}
-            className=" text-danger"
-            cursor={"pointer"}
-          />
-          <Link to={`${item.id}`}>
-            <FontAwesomeIcon
-              icon={faEdit}
-              className=" text-primary"
-              cursor={"pointer"}
-            />
-          </Link>
-        </td>
-      </tr>
-    ));
+
   const headerShow = Header.map((item, index) => (
     <th key={index}>{item.name}</th>
   ));
@@ -155,7 +129,47 @@ export default function Orders() {
             <th>action</th>
           </tr>
         </thead>
-        <tbody>{showTableBody}</tbody>
+        <tbody>
+          {!isGet ? (
+            <tr className="text-center">
+              <td colSpan={12}>
+                <h3>loading...</h3>
+              </td>
+            </tr>
+          ) : data.length !== 0 ? (
+            isGet &&
+            currentData.map((item, index) => (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                {Header.map((itemHeader, headerIndex) => (
+                  <td key={headerIndex}>{item[itemHeader.key]}</td>
+                ))}
+                <td className="d-flex justify-content-between align-items-center">
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    onClick={() => handleDeleteOpen(item.id)}
+                    className=" text-danger"
+                    cursor={"pointer"}
+                  />
+                  <Link to={`${item.id}`}>
+                    <FontAwesomeIcon
+                      icon={faEdit}
+                      className=" text-primary"
+                      cursor={"pointer"}
+                    />
+                  </Link>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr className="text-center">
+              <td colSpan={12}>
+                <h3>No orders found</h3>
+              </td>
+            </tr>
+          )}
+          {/* {showTableBody} */}
+        </tbody>
       </Table>
       {showDeleteModal}
       {isGet && (<Pagination>

@@ -39,7 +39,7 @@ import Order from "./Pages/Dashboard/orders/Order";
 import Notifications from "./Pages/Dashboard/notifications/Notifications";
 import Statistic from "./Pages/Dashboard/statistic/Statistic";
 
-export default function App() {
+export default function App({PropNotification}) {
   const [setting, setSetting] = useState(0);
   function updateSettings() {
     setSetting((prev) => prev + 1);
@@ -86,14 +86,14 @@ export default function App() {
         ></Route>
         {/* protected routes */}
         <Route element={<RequireAuth AllowedRole={["1995", "1996", "1999"]} />}>
-          <Route path="/dashboard" element={<Dashboard setting={setting} />}>
+          <Route path="/dashboard" element={<Dashboard setting={setting} PropNotification={PropNotification} />}>
             <Route
               path="settings"
               element={<Settings updateSettings={updateSettings} />}
             ></Route>
             <Route
               path="notifications"
-              element={<Notifications  />}
+              element={<Notifications />}
             ></Route>
             <Route path="userProfile" element={<UserProfile />}></Route>
 
