@@ -21,14 +21,14 @@ export default function TableShow(props) {
       </td>
     </tr>
   );
+  // pagination 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10; // Set the number of items per page
-
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentData = props.data.slice(indexOfFirstItem, indexOfLastItem);
-
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  // pagination 
 
   // make head of table
   const headerShow = props.header.map((item, index) => (

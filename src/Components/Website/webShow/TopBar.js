@@ -20,7 +20,9 @@ export default function TopNavBar() {
   const [isAuthExist, setIsAuthExist] = useState(false);
   const [isGet, setIsGet] = useState(false);
   const [IsAction, setIsAction] = useState(0);
-
+  const [notifications, setNotifications] = useState([]);
+  const [countUnreadNotifications, setCountUnreadNotifications] =
+    useState(false);
   const [settings, setSettings] = useState();
   const [isGetSettings, setIsGetSettings] = useState();
 
@@ -43,8 +45,6 @@ export default function TopNavBar() {
     };
     fetchData();
   }, []);
-
-
   // useEffect to fetch settings
   useEffect(() => {
     Axios.get("/settings/index")
@@ -55,8 +55,120 @@ export default function TopNavBar() {
       .catch((err) => console.error(err));
   }, []);
 
-  
+  // useEffect to fetch notifications
+  useEffect(() => {
+    Axios.get("/client/notification/all")
+      .then((data) => {
+        setIsGet(true);
+        const notificationsArray = Object.values(data.data.notifications || {});
+        setNotifications(notificationsArray);
+      })
+      .catch((err) => console.error(err));
+  }, [IsAction]);
 
+  // useEffect to count unread notifications
+  useEffect(() => {
+    Axios.get("/client/notification/countUnreadNotifications")
+      .then((data) => setCountUnreadNotifications(data.data))
+      .catch((err) => console.error(err));
+  }, [IsAction]);
+  // Function to format time ago
+  const formatTimeAgo = (timestamp) => {
+    const now = moment();
+    const notificationTime = moment(timestamp);
+    const weeksAgo = now.diff(notificationTime, "weeks");
+    const daysAgo = now.diff(notificationTime, "days");
+    const hoursAgo = now.diff(notificationTime, "hours");
+    const minutesAgo = now.diff(notificationTime, "minutes");
+
+    if (weeksAgo > 0) {
+      return ` ${weeksAgo} ${weeksAgo === 1 ? "w" : "w"}`;
+    } else if (daysAgo > 0) {
+      return ` ${daysAgo} ${daysAgo === 1 ? "d" : "d"}`;
+    } else if (hoursAgo > 0) {
+      return ` ${hoursAgo} ${hoursAgo === 1 ? "h" : "h"}`;
+    } else if (minutesAgo > 0) {
+      return ` ${minutesAgo} ${minutesAgo === 1 ? "m" : "m"}`;
+    } else {
+      return "just now";
+    }
+  };
+
+  // Function to mark all notifications as read
+  const markAllAsRead = async () => {
+    try {
+      await Axios.post("/client/notification/markAllAsRead");
+      console.log("success markAllAsRead");
+      setIsAction((prev) => prev + 1);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // Function to mark notification as read by id
+  const markAsReadById = async (id) => {
+    try {
+      await Axios.post("/client/notification/markAsReadById/" + id);
+      console.log("success markAsReadById");
+      setIsAction((prev) => prev + 1);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // JSX for displaying notifications
+  const showNotifications = notifications
+    .slice(0, 15)
+    .map((notification, index) => (
+      <Dropdown.Item
+        key={index}
+        className="p-0 text-black"
+        style={{
+          borderBottom: "2px solid white",
+          borderRadius: "5px",
+        }}
+      >
+        {notification.read_at === null ? (
+          <div onClick={() => markAsReadById(notification.id)}>
+            <div
+              className={`bg-${
+                notification.read_at ? "success" : "primary"
+              } px-3 text-white w-100 m-0`}
+            >
+              <span className="m-0">
+                <span
+                  style={{
+                    fontWeight: "bold",
+                    color: "black",
+                  }}
+                >
+                  {" "}
+                  has changed to {notification.data.status}
+                </span>{" "}
+              </span>
+              <br />
+              <span>{formatTimeAgo(notification.created_at)}</span>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <div className="bg-success px-3 text-white w-100 m-0">
+              <span className="m-0">
+                <span
+                  style={{
+                    fontWeight: "bold",
+                    color: "black",
+                  }}
+                ></span>{" "}
+                has changed to {notification.data.status}
+              </span>
+              <br />
+              <span>{formatTimeAgo(notification.created_at)}</span>
+            </div>
+          </div>
+        )}
+      </Dropdown.Item>
+    ));
 
   // JSX for displaying categories
   const showCategories = categories.map((category, index) => (
@@ -115,63 +227,72 @@ export default function TopNavBar() {
   const showRightSide = (
     <div className="d-flex me-5">
       {isAuthExist && (
-        <Dropdown className="mt-1 me-2 ">
-          <Dropdown.Toggle
-            variant="link"
-            id="dropdown-basic"
-            style={{
-              padding: "0.5rem",
-              textDecoration: "none",
-              position: "relative",
-            }}
-          >
-            <FontAwesomeIcon
-              icon={faBell}
-              style={{ cursor: "pointer", fontSize: "1.2rem" }}
-            />
+         <Dropdown className="mt-1 me-2 ">
+         <Dropdown.Toggle
+           variant="link"
+           id="dropdown-basic"
+           style={{
+             padding: "0.5rem",
+             textDecoration: "none",
+             position: "relative",
+           }}
+         >
+           <FontAwesomeIcon
+             icon={faBell}
+             style={{ cursor: "pointer", fontSize: "1.2rem" }}
+           />
 
-
-              <span
-                style={{
-                  fontSize: "14px",
-                  color: "black",
-                  position: "absolute",
-                  top: "0",
-                  right: "0",
-                  backgroundColor: "red",
-                  borderRadius: "50%",
-                  padding: "2px 6px",
-                }}
-              >
-              </span>
-          </Dropdown.Toggle>
-            <Dropdown.Menu style={{ fontSize: "12px", padding: 0 }}>
-              <div className="d-flex justify-content-center">
-                <Dropdown.Item className="bg-secondary text-white w-100 ">
-                  <div
-                    cursor={"pointer"}
-                    className="bg-secondary text-white w-100"
-                  >
-                    Mark all as read
-                  </div>
-                </Dropdown.Item>
-                <Dropdown.Item className="bg-black text-white w-100 ">
-                  <div
-                    cursor={"pointer"}
-                    onClick={() => setIsAction((prev) => prev + 1)}
-                    className="bg-black text-white w-100"
-                  >
-                    Refresh
-                  </div>
-                </Dropdown.Item>
-              </div>
-              <Dropdown.Item className="bg-secondary w-100 ">
-                <div className="bg-secondary text-white w-100">
-                  See All Notifications
-                </div>
-              </Dropdown.Item>
-            </Dropdown.Menu>
-        </Dropdown>
+           {countUnreadNotifications === 0 ? (
+             ""
+           ) : (
+             <span
+               style={{
+                 fontSize: "14px",
+                 color: "black",
+                 position: "absolute",
+                 top: "0",
+                 right: "0",
+                 backgroundColor: "red",
+                 borderRadius: "50%",
+                 padding: "2px 6px",
+               }}
+             >
+               {" "}
+               {countUnreadNotifications}
+             </span>
+           )}
+         </Dropdown.Toggle>
+         {isGet && (
+           <Dropdown.Menu style={{ fontSize: "12px", padding: 0 }}>
+             <div className="d-flex justify-content-center">
+               <Dropdown.Item className="bg-secondary text-white w-100 ">
+                 <div
+                   cursor={"pointer"}
+                   onClick={markAllAsRead}
+                   className="bg-secondary text-white w-100"
+                 >
+                   Mark all as read
+                 </div>
+               </Dropdown.Item>
+               <Dropdown.Item className="bg-black text-white w-100 ">
+                 <div
+                   cursor={"pointer"}
+                   onClick={() => setIsAction((prev) => prev + 1)}
+                   className="bg-black text-white w-100"
+                 >
+                   Refresh
+                 </div>
+               </Dropdown.Item>
+             </div>
+             {showNotifications}
+             {/* <Dropdown.Item className="bg-secondary w-100 ">
+               <div className="bg-secondary text-white w-100">
+                 See All Notifications
+               </div>
+             </Dropdown.Item> */}
+           </Dropdown.Menu>
+         )}
+       </Dropdown>
       )}
 
       {!isAuthExist ? (

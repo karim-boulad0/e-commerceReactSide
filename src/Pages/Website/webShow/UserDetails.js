@@ -45,6 +45,7 @@ export default function UserDetails() {
     Axios.post("/webSite/storeDetails", form)
       .then(() => {
         setDone(true);
+        window.history.back() 
       })
       .catch((err) => {
         console.log(err);

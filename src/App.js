@@ -37,6 +37,7 @@ import WebSiteOrders from "./Pages/Website/webShow/Orders";
 import Orders from "./Pages/Dashboard/orders/Orders";
 import Order from "./Pages/Dashboard/orders/Order";
 import Notifications from "./Pages/Dashboard/notifications/Notifications";
+import Statistic from "./Pages/Dashboard/statistic/Statistic";
 
 export default function App() {
   const [setting, setSetting] = useState(0);
@@ -48,7 +49,7 @@ export default function App() {
     <>
       <Routes>
         {/* <Route element={<Test />} path="/test"></Route> */}
-        <Route element={<Notifications />} path="/test"></Route>
+        <Route element={<Orders />} path="/test"></Route>
         {/* global  */}
         <Route element={<ForBiden />} path="/dashboard/403"></Route>
         <Route path="/*" element={<ForBiden4 />}></Route>
@@ -104,6 +105,9 @@ export default function App() {
             <Route element={<RequireAuth AllowedRole={["1995"]} />}>
               <Route path="orders" element={<Orders />}></Route>
               <Route element={<Order />} path="orders/:id"></Route>
+            </Route>
+            <Route element={<RequireAuth AllowedRole={["1995"]} />}>
+              <Route path="statistic" element={<Statistic />}></Route>
             </Route>
 
             <Route element={<RequireAuth AllowedRole={["1999", "1995"]} />}>

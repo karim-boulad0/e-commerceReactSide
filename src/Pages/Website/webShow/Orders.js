@@ -35,7 +35,7 @@ export default function WebSiteOrders() {
     setStatus(orderItem.status);
     setShowModal(true);
   };
- 
+
 
   useEffect(() => {
     Axios.get("/webSite/orders/index")
@@ -55,14 +55,17 @@ export default function WebSiteOrders() {
 
   async function handleEdit() {
     try {
-      await Axios.post(`/webSite/orderItems/editOrderItem`, {
-        id: id,
-        quantity: quantity,
-        note: note,
-        status: status,
-      });
-      setIsEdit((prev) => prev + 1);
-      handleModalClose();
+      if (quantity >= 1 && quantity <= 3) {
+        await Axios.post(`/webSite/orderItems/editOrderItem`, {
+          id: id,
+          quantity: quantity,
+          note: note,
+          status: status,
+        });
+        setIsEdit((prev) => prev + 1);
+        handleModalClose();
+      }
+
     } catch (err) {
       console.log(err);
     }
@@ -171,6 +174,8 @@ export default function WebSiteOrders() {
                 className="form-control"
                 id="quantity"
                 value={quantity}
+                max={3}
+                min={1}
                 onChange={(e) => setQuantity(e.target.value)}
               />
             </div>

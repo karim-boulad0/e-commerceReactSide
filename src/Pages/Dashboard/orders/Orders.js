@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Axios } from "../../../Api/Axios";
-import { Button, Container, Modal, Table } from "react-bootstrap";
+import { Button, Container, Modal, Table, Pagination } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
@@ -39,12 +39,27 @@ export default function Orders() {
       key: "countOrderItems",
       name: "countOrderItems",
     },
+    {
+      key: "countProducts",
+      name: "countProducts",
+    },
   ];
   const [isDelete, setIsDelete] = useState(0);
   const [query, setQuery] = useState("");
   const [id, setId] = useState("");
-
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  // pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10; // Set the number of items per page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  if (isGet) {
+    const currentData = data.slice(indexOfFirstItem, indexOfLastItem);
+  }
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+
+  // pagination
   function handleDeleteOpen(id) {
     setShowDeleteConfirmation(true);
     setId(id);
@@ -69,8 +84,7 @@ export default function Orders() {
     Axios.get(`/dashboard/orders/index?filter[item]=${query}`)
       .then((response) => {
         const dataArray = Object.values(response.data);
-
-        setData(dataArray);        setIsGet(true);
+        setData(dataArray); setIsGet(true);
       })
       .catch((err) => console.log(err));
   }, [query, isDelete]);
@@ -122,7 +136,7 @@ export default function Orders() {
     </Modal>
   );
   return (
-    <Container classNam="mt-5">
+    <Container className="mt-5">
       <h1>Orders</h1>
       <div className="mb-2 mt-2">
         <input
@@ -144,6 +158,20 @@ export default function Orders() {
         <tbody>{showTableBody}</tbody>
       </Table>
       {showDeleteModal}
+      {isGet && (<Pagination>
+        {[...Array(Math.ceil(data.length / itemsPerPage)).keys()].map(
+          (number) => (
+            <Pagination.Item
+              key={number + 1}
+              active={number + 1 === currentPage}
+              onClick={() => paginate(number + 1)}
+            >
+              {number + 1}
+            </Pagination.Item>
+          )
+        )}
+      </Pagination>)}
+
     </Container>
   );
 }

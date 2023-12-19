@@ -103,7 +103,6 @@ export default function TopBar({ setting }) {
         {notification.read_at === null ? (
           <Link
             onClick={() => markAsReadById(notification.id)}
-            to={`notifications/${notification.id}`}
           >
             <div
               className={`bg-${notification.read_at ? "success" : "primary"
@@ -248,7 +247,12 @@ export default function TopBar({ setting }) {
             />
           </Link>
         </h3>
-
+        <FontAwesomeIcon
+          cursor={"pointer"}
+          onClick={() => setIsOpen((prev) => !prev)}
+          icon={faBars}
+          className="ms-4"
+        />
       </div>
 
       <div className="text-center d-flex align-items-center gap-4">

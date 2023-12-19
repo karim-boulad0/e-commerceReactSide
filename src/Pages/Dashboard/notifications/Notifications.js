@@ -2,17 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Axios } from "../../../Api/Axios";
 import { Alert, Container, Row, Col } from "react-bootstrap";
 import moment from "moment";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Notifications() {
     const [notifications, setNotifications] = useState([]);
     const [isGet, setIsGet] = useState(false);
-    console.log(notifications);
-    console.log(notifications[0]);
-    console.log(notifications[0]?.data);
-    console.log(notifications[0]?.data?.client);
-    console.log(notifications[0]?.data?.client[0]);
-    console.log(notifications[0]?.data?.client[0]?.userDetails);
+
     useEffect(() => {
         Axios.get("/dashboard/admin/notification/all")
             .then((data) => {
@@ -43,7 +38,7 @@ export default function Notifications() {
         }
     };
     async function markAsReadById(id) {
-        await Axios.post("/admin/notification/markAsReadById/" + id)
+        await Axios.post("/dashboard/admin/notification/markAsReadById/" + id)
             .then(() => {
                 console.log("success markAsReadById");
             })
@@ -55,9 +50,10 @@ export default function Notifications() {
         <Container className="mt-5">
             <h1>Notifications</h1>
             <Row>
-                {isGet && notifications.map((notification) => (
+                {isGet && notifications.map((notification,index) => (
                     <Link
-                        to={notification.id}
+                    key={index}
+                        // to={notification.id}
                         onClick={() => {
                             markAsReadById(notification.id);
                         }}
@@ -72,12 +68,12 @@ export default function Notifications() {
                             >
                                 <Alert.Heading>{notification.id}</Alert.Heading>
                                 <p>
-                                    first_name:     {notification.data.client[0].userDetails?.first_name}
+                                    first_name:     {notification.data.client[0].user_details?.first_name}
                                 </p>
-                                <p>      last_name:    {notification.data.client[0].userDetails?.last_name}  </p>
+                                <p>      last_name:    {notification.data.client[0].user_details?.last_name}  </p>
                                 <p>Email: {notification.data.client[0].email}</p>
-                                <p>address: {notification.data.client[0].userDetails?.address}</p>
-                                <p>phone_number: {notification.data.client[0].userDetails?.phone_number}</p>
+                                <p>address: {notification.data.client[0].user_details?.address}</p>
+                                <p>phone_number: {notification.data.client[0].user_details?.phone_number}</p>
                                 <p>{formatTimeAgo(notification.created_at)} ago</p>
 
                             </Alert>
