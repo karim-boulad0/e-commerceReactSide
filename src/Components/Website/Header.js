@@ -24,7 +24,7 @@ export default function Header() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" to="/navbar/homePage">
           <img
             src={isGet && settings.logo}
             style={{
@@ -41,16 +41,15 @@ export default function Header() {
         </button>
 
         <div
-          className={`collapse navbar-collapse justify-content-end ${
-            collapsed ? "show" : ""
-          }`}
+          className={`collapse navbar-collapse justify-content-end ${collapsed ? "show" : ""
+            }`}
         >
           <ul className="navbar-nav me-5 ">
             <li className="nav-item">
               <Link
                 className="nav-link "
                 aria-current="page"
-                to="/"
+                to="/navbar/homePage"
                 onClick={() => setCollapsed(false)}
               >
                 Home
