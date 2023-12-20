@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Axios } from "../../../Api/Axios.js";
-import { Col, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
+// import "./css/SiteCategories.css"
 export default function SiteCategories() {
   const [allCategories, setAllCategories] = useState([]);
   const [query, setQuery] = useState(""); 
@@ -21,7 +22,7 @@ export default function SiteCategories() {
   
   // show
   const ShowCategories = allCategories.map((category) => (
-    <Col lg={3} key={category.id}>
+    <Col lg={3} md={3} sm={4} xs={12} key={category.id}>
       <NavLink to={`/NavBar/categoryProducts/${category.id}`}>
         <div className="card mb-4 shadow">
           <Link to={`/NavBar/categoryProducts/${category.id}`}>
@@ -41,7 +42,7 @@ export default function SiteCategories() {
   ));
 
   return (
-    <>
+    <Container>
       <h1>Categories</h1>
       <input
         type="text"
@@ -51,6 +52,6 @@ export default function SiteCategories() {
         onChange={(e) => setQuery(e.target.value)}
       />
       <Row>{ShowCategories}</Row>
-    </>
+    </Container>
   );
 }

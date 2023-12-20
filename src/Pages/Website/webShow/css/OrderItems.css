@@ -1,0 +1,19 @@
+/* styles.css */
+
+/* Add your styles here */
+.card-container {
+    height: 100%;
+  }
+  
+  .card-img {
+    height: 200px;
+  }
+  
+  .card-title {
+    font-size: 1.2rem;
+  }
+  
+  .card-text {
+    margin-bottom: 0.5rem;
+  }
+  

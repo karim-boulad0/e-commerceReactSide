@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Container,
@@ -8,11 +8,14 @@ import {
   NavDropdown,
   Navbar,
 } from "react-bootstrap";
+
 import { Link, NavLink } from "react-router-dom";
 import moment from "moment/moment";
 import { Axios } from "../../../Api/Axios";
 import { faBell, faUser } from "@fortawesome/free-solid-svg-icons";
 import "./NavBar.css";
+import "./css/TopBar.css";
+import { WindowSize } from "../../../context/WindowContext";
 
 export default function TopNavBar() {
   // State variables
@@ -25,7 +28,8 @@ export default function TopNavBar() {
     useState(false);
   const [settings, setSettings] = useState();
   const [isGetSettings, setIsGetSettings] = useState();
-
+  const windowSize = useContext(WindowSize);
+  const Size = windowSize.windowWidth;
   // useEffect to check if user is authenticated
   useEffect(() => {
     Axios.get("/webSite/isAuthExist")
@@ -131,9 +135,8 @@ export default function TopNavBar() {
         {notification.read_at === null ? (
           <div onClick={() => markAsReadById(notification.id)}>
             <div
-              className={`bg-${
-                notification.read_at ? "success" : "primary"
-              } px-3 text-white w-100 m-0`}
+              className={`bg-${notification.read_at ? "success" : "primary"
+                } px-3 text-white w-100 m-0`}
             >
               <span className="m-0">
                 <span
@@ -172,14 +175,10 @@ export default function TopNavBar() {
 
   // JSX for displaying categories
   const showCategories = categories.map((category, index) => (
-    <NavDropdown.Item key={index}>
-      <div>
-        <Link
-          to={`/NavBar/categoryProducts/${category.id}`}
-        >
-          {category.title}
-        </Link>
-      </div>
+    <NavDropdown.Item key={index} className="category-item">
+      <Link to={`/NavBar/categoryProducts/${category.id}`} className="category-link">
+        {category.title}
+      </Link>
     </NavDropdown.Item>
   ));
 
@@ -187,7 +186,7 @@ export default function TopNavBar() {
   const showLeftNavBar = (
     <Nav className="me-auto ">
       <Navbar.Brand>
-        <Link className="navbar-brand" to="/NavBar/SecondHomePage">
+        <Link className="navbar-brand" to="/NavBar/HomePage">
           <img
             src={isGetSettings && settings.logo}
             style={{
@@ -200,7 +199,7 @@ export default function TopNavBar() {
         </Link>
       </Navbar.Brand>
 
-      <Link to="/NavBar/SecondHomePage" className="navbar-brand mt-2">
+      <Link to="/NavBar/HomePage" className="navbar-brand mt-2">
         Home
       </Link>
       <Link to="/NavBar/about" className="navbar-brand mt-2">
@@ -210,16 +209,18 @@ export default function TopNavBar() {
         ContactUs
       </a>
 
-      <NavDropdown
+      {Size > 580 ? (<NavDropdown
         title="Categories"
-        className="w-100 mt-2 "
+        className="w-100 mt-2"
         id="basic-nav-dropdown"
       >
-        <div className="m-0 text-center p-0 ">{showCategories}</div>
-        <div className="bg-black text-white w-100 m-0 text-center">
-          <Link to={"/NavBar/categories"}>See All </Link>
-        </div>
-      </NavDropdown>
+        <div className="categories-container">{showCategories}</div>
+        <Link to={"/NavBar/categories"} className="see-all-link">
+          See All
+        </Link>
+      </NavDropdown>) : <Link to={"/NavBar/categories"} className="navbar-brand mt-2">
+       Categories
+      </Link>}
     </Nav>
   );
 
@@ -227,72 +228,72 @@ export default function TopNavBar() {
   const showRightSide = (
     <div className="d-flex me-5">
       {isAuthExist && (
-         <Dropdown className="mt-1 me-2 ">
-         <Dropdown.Toggle
-           variant="link"
-           id="dropdown-basic"
-           style={{
-             padding: "0.5rem",
-             textDecoration: "none",
-             position: "relative",
-           }}
-         >
-           <FontAwesomeIcon
-             icon={faBell}
-             style={{ cursor: "pointer", fontSize: "1.2rem" }}
-           />
+        <Dropdown className="mt-1 me-2" drop="down" align="end">
+          <Dropdown.Toggle
+            variant="link"
+            id="dropdown-basic"
+            style={{
+              padding: "0.5rem",
+              textDecoration: "none",
+              position: "relative",
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faBell}
+              style={{ cursor: "pointer", fontSize: "1.2rem" }}
+            />
 
-           {countUnreadNotifications === 0 ? (
-             ""
-           ) : (
-             <span
-               style={{
-                 fontSize: "14px",
-                 color: "black",
-                 position: "absolute",
-                 top: "0",
-                 right: "0",
-                 backgroundColor: "red",
-                 borderRadius: "50%",
-                 padding: "2px 6px",
-               }}
-             >
-               {" "}
-               {countUnreadNotifications}
-             </span>
-           )}
-         </Dropdown.Toggle>
-         {isGet && (
-           <Dropdown.Menu style={{ fontSize: "12px", padding: 0 }}>
-             <div className="d-flex justify-content-center">
-               <Dropdown.Item className="bg-secondary text-white w-100 ">
-                 <div
-                   cursor={"pointer"}
-                   onClick={markAllAsRead}
-                   className="bg-secondary text-white w-100"
-                 >
-                   Mark all as read
-                 </div>
-               </Dropdown.Item>
-               <Dropdown.Item className="bg-black text-white w-100 ">
-                 <div
-                   cursor={"pointer"}
-                   onClick={() => setIsAction((prev) => prev + 1)}
-                   className="bg-black text-white w-100"
-                 >
-                   Refresh
-                 </div>
-               </Dropdown.Item>
-             </div>
-             {showNotifications}
-             {/* <Dropdown.Item className="bg-secondary w-100 ">
+            {countUnreadNotifications === 0 ? (
+              ""
+            ) : (
+              <span
+                style={{
+                  fontSize: "14px",
+                  color: "black",
+                  position: "absolute",
+                  top: "0",
+                  right: "0",
+                  backgroundColor: "red",
+                  borderRadius: "50%",
+                  padding: "2px 6px",
+                }}
+              >
+                {" "}
+                {countUnreadNotifications}
+              </span>
+            )}
+          </Dropdown.Toggle>
+          {isGet && (
+            <Dropdown.Menu style={{ fontSize: "12px", padding: 0 }}>
+              <div className="d-flex justify-content-center">
+                <Dropdown.Item className="bg-secondary text-white w-100 ">
+                  <div
+                    cursor={"pointer"}
+                    onClick={markAllAsRead}
+                    className="bg-secondary text-white w-100"
+                  >
+                    Mark all as read
+                  </div>
+                </Dropdown.Item>
+                <Dropdown.Item className="bg-black text-white w-100 ">
+                  <div
+                    cursor={"pointer"}
+                    onClick={() => setIsAction((prev) => prev + 1)}
+                    className="bg-black text-white w-100"
+                  >
+                    Refresh
+                  </div>
+                </Dropdown.Item>
+              </div>
+              {showNotifications}
+              {/* <Dropdown.Item className="bg-secondary w-100 ">
                <div className="bg-secondary text-white w-100">
                  See All Notifications
                </div>
              </Dropdown.Item> */}
-           </Dropdown.Menu>
-         )}
-       </Dropdown>
+            </Dropdown.Menu>
+          )}
+        </Dropdown>
       )}
 
       {!isAuthExist ? (
@@ -305,6 +306,7 @@ export default function TopNavBar() {
           title={<FontAwesomeIcon icon={faUser} className="fs-6" />}
           className="mt-2 pt-1 ms-3  text-primary"
           id="basic-nav-dropdown"
+          drop="down" align="end"
         >
           {" "}
           <NavDropdown.Item>{isAuthExist.name}</NavDropdown.Item>

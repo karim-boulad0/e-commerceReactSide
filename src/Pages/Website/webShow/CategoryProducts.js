@@ -8,9 +8,10 @@ import { Card, Col, Row } from "react-bootstrap";
 export default function CategoryProducts() {
 
   const [categoryProducts, setCategoryProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [IsGet, setIsGet] = useState(false);
   const [error, setError] = useState(null);
-  const [searchTerm, setSearchTerm] = useState(""); 
+  const [searchTerm, setSearchTerm] = useState("");
+  const [categoryTitle, setCategoryTitle] = useState();
 
   const { id } = useParams();
 
@@ -21,11 +22,12 @@ export default function CategoryProducts() {
         const response = await Axios.get(
           `/webSite/categoriesWithProductsById/${id}?filter[item]=${searchTerm}`
         );
-        setCategoryProducts(response.data);
-        setLoading(false);
+        setCategoryProducts(response.data.data);
+        setCategoryTitle(response.data.category)
+        setIsGet(true);
       } catch (error) {
         setError("Error fetching data. Please try again later.");
-        setLoading(false);
+        setIsGet(false);
       }
     };
     fetchData();
@@ -35,7 +37,7 @@ export default function CategoryProducts() {
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
-  if (loading) {
+  if (!IsGet) {
     return <Spinner />;
   }
   if (error) {
@@ -44,7 +46,7 @@ export default function CategoryProducts() {
   //show
   const showProducts = (
     <Row>
-      {categoryProducts.map((product,index) => (
+      {categoryProducts.map((product, index) => (
         <Col className="mb-4" md={4} lg={3} sm={6} key={index}>
           <Card className=" mb-4 shadow">
             <Link to={`/NavBar/product/${product.id}`}>
@@ -57,7 +59,9 @@ export default function CategoryProducts() {
             </Link>
             <Card.Body>
               <Card.Title className="card-title">{product.title}</Card.Title>
-              <Card.Text className="card-text">{product.description}</Card.Text>
+              <p className="mb-0">Price: ${product.price}</p>
+
+              <p className="mb-0" style={{ visibility: product.discount > 0 ? 'visible' : 'hidden' }}>Discount: ${product.discount}</p>
               <div className="d-flex justify-content-between align-items-center">
                 <Rating
                   count={5}
@@ -66,13 +70,13 @@ export default function CategoryProducts() {
                   size={20}
                   activeColor="#ffd700"
                 />
-                <p className="mb-0">Price: ${product.price}</p>
+
               </div>
             </Card.Body>
             <div className="card-footer">
               <Row className="d-flex">
-                {product.images.slice(0, 5).map((img, index) => (
-                  <Col key={index} lg={6} md={6} sm={4}>
+                {product.images.slice(0, 2).map((img, index) => (
+                  <Col key={index} lg={6} md={6} sm={6} xs={6}>
                     <img
                       key={index}
                       src={img.image}
@@ -87,7 +91,7 @@ export default function CategoryProducts() {
                         zIndex: 1,
                       }}
                       onMouseOver={(e) => {
-                        e.target.style.transform = "scale(4.6)";
+                        e.target.style.transform = "scale(2.6)";
                         e.target.style.zIndex = 2;
                       }}
                       onMouseOut={(e) => {
@@ -110,6 +114,7 @@ export default function CategoryProducts() {
         className="container"
         style={{ marginTop: "80px", marginBottom: "80px" }}
       >
+        <h1>{categoryTitle}</h1>
         {/* Search Input */}
         <input
           type="text"

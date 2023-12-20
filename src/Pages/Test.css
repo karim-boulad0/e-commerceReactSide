@@ -1,0 +1,44 @@
+/* Test.css */
+
+/* Container for categories */
+.categories-container {
+  max-height: 300px; /* Set a maximum height for the dropdown */
+  overflow-y: auto; /* Enable vertical scrolling if needed */
+}
+
+/* Individual category item */
+.category-item {
+  padding: 8px 16px;
+  transition: background-color 0.3s ease;
+}
+
+.category-item:hover {
+  background-color: #f8f8f8;
+}
+
+/* Category link styles */
+.category-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  width: 100%; /* Make the link take up the entire width of the item */
+}
+
+.category-link:hover .category-item {
+  background-color: #f8f8f8; /* Change background color on hover */
+}
+
+/* "See All" link */
+.see-all-link {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #000;
+  text-align: center;
+  font-weight: bold;
+}
+
+.see-all-link:hover {
+  background-color: #333;
+}

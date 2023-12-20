@@ -235,7 +235,7 @@ export default function TopBar({ setting ,PropNotification}) {
     >
       <div className="d-flex align-items-center">
         <h3 className="me-4">
-          <Link className=" E-Commerce" to="/NavBar/SecondHomePage">
+          <Link className=" E-Commerce" to="/NavBar/HomePage">
             <img
               src={isGetSettings && settings.logo}
               style={{

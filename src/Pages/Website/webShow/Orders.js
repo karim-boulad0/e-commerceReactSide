@@ -11,6 +11,7 @@ import {
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDeleteLeft, faEdit } from "@fortawesome/free-solid-svg-icons";
+import Spinner from "../../../Components/Global/Spinner";
 
 export default function WebSiteOrders() {
   const [orders, setOrders] = useState([]);
@@ -80,6 +81,9 @@ export default function WebSiteOrders() {
       console.log(err);
     }
   }
+  if (!isGetOrders) {
+    return (<Spinner />)
+  }
   return (
     <Container>
       <h1>Orders</h1>
@@ -92,6 +96,7 @@ export default function WebSiteOrders() {
             >
               <h3>Order #{order.id}</h3>
               <p>Status: {order.status}</p>
+              <p>payment_method: {order.payment_method}</p>
               <p>note: {order.note}</p>
               <p>total_price: {order.total_price}</p>
             </div>
@@ -105,6 +110,7 @@ export default function WebSiteOrders() {
                       lg={3}
                       md={4}
                       sm={6}
+                      xs={6}
                       className="mb-2"
                     >
                       <Card

@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import HomePage from "./Pages/Website/webShow/HomePage";
 import Login from "./Pages/Website/Auth/Login";
 import SignUp from "./Pages/Website/Auth/SignUp";
 import Logout from "./Pages/Website/Auth/Logout";
@@ -25,7 +24,7 @@ import Product from "./Pages/Dashboard/products/Product";
 import WebsiteProduct from "./Pages/Website/webShow/WebsiteProduct";
 import UserDetails from "./Pages/Website/webShow/UserDetails";
 import MainWebSiteLayout from "./Components/Website/webShow/MainWebSiteLayout";
-import SecondHomePage from "./Pages/Website/webShow/SecondHomePage";
+import HomePage from "./Pages/Website/webShow/HomePage";
 import About from "./Pages/Website/webShow/About";
 import Settings from "./Pages/Dashboard/settings/Settings";
 import { useState } from "react";
@@ -39,7 +38,7 @@ import Order from "./Pages/Dashboard/orders/Order";
 import Notifications from "./Pages/Dashboard/notifications/Notifications";
 import Statistic from "./Pages/Dashboard/statistic/Statistic";
 
-export default function App({PropNotification}) {
+export default function App({ PropNotification }) {
   const [setting, setSetting] = useState(0);
   function updateSettings() {
     setSetting((prev) => prev + 1);
@@ -48,8 +47,8 @@ export default function App({PropNotification}) {
   return (
     <>
       <Routes>
-        {/* <Route element={<Test />} path="/test"></Route> */}
-        <Route element={<Orders />} path="/test"></Route>
+        <Route element={< Test/>} path="/test"></Route>
+        {/* <Route element={<HomePage />} path="/test"></Route> */}
         {/* global  */}
         <Route element={<ForBiden />} path="/dashboard/403"></Route>
         <Route path="/*" element={<ForBiden4 />}></Route>
@@ -60,7 +59,7 @@ export default function App({PropNotification}) {
           <Route path="categories" element={<SiteCategories />}></Route>
           <Route path="about" element={<About />}></Route>
           <Route path="userDetails" element={<UserDetails />}></Route>
-          <Route path="SecondHomePage" element={<SecondHomePage />}></Route>
+          <Route path="HomePage" element={<HomePage />}></Route>
           <Route path="carts" element={<OrderItems />}></Route>
           <Route path="orders" element={<WebSiteOrders />}></Route>
 
@@ -74,7 +73,7 @@ export default function App({PropNotification}) {
 
         {/* public routes auth  */}
 
-        <Route path="/" element={<HomePage />}></Route>
+        {/* <Route path="/" element={<HomePage />}></Route> */}
         <Route element={<RequireBack />}>
           <Route path="/register" element={<SignUp />}></Route>
           <Route path="/login" element={<Login />}></Route>
