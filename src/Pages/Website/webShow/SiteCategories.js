@@ -23,9 +23,9 @@ export default function SiteCategories() {
   // show
   const ShowCategories = allCategories.map((category) => (
     <Col lg={3} md={3} sm={4} xs={12} key={category.id}>
-      <NavLink to={`/NavBar/categoryProducts/${category.id}`}>
+      <NavLink to={`/index/categoryProducts/${category.id}`}>
         <div className="card mb-4 shadow">
-          <Link to={`/NavBar/categoryProducts/${category.id}`}>
+          <Link to={`/index/categoryProducts/${category.id}`}>
             <img
               src={category.image}
               alt={category.title}

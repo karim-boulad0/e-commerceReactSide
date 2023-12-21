@@ -42,7 +42,7 @@ export default function Test() {
       {isGet &&
         bestProducts.map((product, index) => (
           <Col key={index} xs={12} lg={3} md={4} sm={6}>
-            <Link to={`/NavBar/product/${product.id}`} className="card-link">
+            <Link to={`/index/product/${product.id}`} className="card-link">
               <Card className="product-card">
                 {product.images.length > 0 && (
                   <Card.Img
@@ -60,7 +60,7 @@ export default function Test() {
                   <Card.Text style={{ visibility: product.discount > 0 ? 'visible' : 'hidden' }}>
                     Discount: {product.discount}%
                   </Card.Text>
-                  <Link to={`/NavBar/product/${product.id}`} className="cart-link">
+                  <Link to={`/index/product/${product.id}`} className="cart-link">
                     <FontAwesomeIcon
                       icon={faCartPlus}
                       style={{ cursor: 'pointer' }}
@@ -76,7 +76,7 @@ export default function Test() {
   );
   const ShowCategories = categories.map((category, index) => (
     <Col lg={3} md={4} sm={6} xs={12} key={index}>
-      <Link to={`/NavBar/categoryProducts/${category.id}`}>
+      <Link to={`/index/categoryProducts/${category.id}`}>
 
         <div className="card mb-2 shadow">
 
@@ -128,7 +128,7 @@ export default function Test() {
         </header>
         {showSlideCategories}
         <div className="categories-link">
-          <Link to={"/NavBar/categories"} >Categories</Link>
+          <Link to={"/index/categories"} >Categories</Link>
         </div>
         <Row style={{ marginTop: "100px" }}>{ShowCategories}</Row>
 

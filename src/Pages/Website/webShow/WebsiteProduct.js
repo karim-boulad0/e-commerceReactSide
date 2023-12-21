@@ -31,10 +31,10 @@ export default function WebsiteProduct() {
             quantity: quantity,
             note: "done",
           }).then((data) => {
-            nav("/NavBar/carts");
+            nav("/index/carts");
           });
         } else {
-          nav("/NavBar/userDetails");
+          nav("/index/userDetails");
         }
       } else {
         nav("/login");

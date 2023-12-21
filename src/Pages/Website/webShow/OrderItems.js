@@ -27,9 +27,9 @@ const OrderItems = () => {
     try {
       await Axios.post("/webSite/orders/confirmAll", { payment_method: selectedPaymentMethod });
       setAction((prev) => prev + 1);
-      nav("/NavBar/orders");
+      nav("/index/orders");
     } catch (err) {
-      nav("/NavBar/orders");
+      nav("/index/orders");
       console.log(err);
     }
   }

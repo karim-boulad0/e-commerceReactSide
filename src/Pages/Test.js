@@ -23,7 +23,7 @@ export default function Test() {
 
   const showCategories = categories.map((category, index) => (
     <NavDropdown.Item key={index} className="category-item">
-      <Link to={`/NavBar/categoryProducts/${category.id}`} className="category-link">
+      <Link to={`/index/categoryProducts/${category.id}`} className="category-link">
         {category.title}
       </Link>
     </NavDropdown.Item>
@@ -38,7 +38,7 @@ export default function Test() {
           id="basic-nav-dropdown"
         >
           <div className="categories-container">{showCategories}</div>
-          <Link to={"/NavBar/categories"} className="see-all-link">
+          <Link to={"/index/categories"} className="see-all-link">
             See All
           </Link>
         </NavDropdown>

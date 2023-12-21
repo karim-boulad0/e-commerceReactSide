@@ -49,7 +49,7 @@ export default function CategoryProducts() {
       {categoryProducts.map((product, index) => (
         <Col className="mb-4" md={4} lg={3} sm={6} key={index}>
           <Card className=" mb-4 shadow">
-            <Link to={`/NavBar/product/${product.id}`}>
+            <Link to={`/index/product/${product.id}`}>
               <img
                 src={product.images[0]?.image || "default-image-url.jpg"}
                 alt={product.title}

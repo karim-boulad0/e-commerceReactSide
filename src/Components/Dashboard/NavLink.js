@@ -5,8 +5,6 @@ import {
   faCaretSquareLeft,
   faGear,
   faSheetPlastic,
-  faShieldHeart,
-  faShoppingBag,
   faSquarePlus,
   faUserPlus,
   faUsers,

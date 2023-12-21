@@ -3,17 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Container,
   Dropdown,
-  DropdownButton,
   Nav,
   NavDropdown,
   Navbar,
 } from "react-bootstrap";
 
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import moment from "moment/moment";
 import { Axios } from "../../../Api/Axios";
 import { faBell, faUser } from "@fortawesome/free-solid-svg-icons";
-import "./NavBar.css";
 import "./css/TopBar.css";
 import { WindowSize } from "../../../context/WindowContext";
 
@@ -36,7 +34,6 @@ export default function TopNavBar() {
       .then((data) => setIsAuthExist(data.data))
       .catch((err) => console.error(err));
   }, []);
-
   // useEffect to fetch categories
   useEffect(() => {
     const fetchData = async () => {
@@ -58,7 +55,6 @@ export default function TopNavBar() {
       })
       .catch((err) => console.error(err));
   }, []);
-
   // useEffect to fetch notifications
   useEffect(() => {
     Axios.get("/client/notification/all")
@@ -69,7 +65,6 @@ export default function TopNavBar() {
       })
       .catch((err) => console.error(err));
   }, [IsAction]);
-
   // useEffect to count unread notifications
   useEffect(() => {
     Axios.get("/client/notification/countUnreadNotifications")
@@ -176,7 +171,7 @@ export default function TopNavBar() {
   // JSX for displaying categories
   const showCategories = categories.map((category, index) => (
     <NavDropdown.Item key={index} className="category-item">
-      <Link to={`/NavBar/categoryProducts/${category.id}`} className="category-link">
+      <Link to={`/index/categoryProducts/${category.id}`} className="category-link">
         {category.title}
       </Link>
     </NavDropdown.Item>
@@ -186,7 +181,7 @@ export default function TopNavBar() {
   const showLeftNavBar = (
     <Nav className="me-auto ">
       <Navbar.Brand>
-        <Link className="navbar-brand" to="/NavBar/HomePage">
+        <Link className="navbar-brand" to="/index/HomePage">
           <img
             src={isGetSettings && settings.logo}
             style={{
@@ -199,10 +194,10 @@ export default function TopNavBar() {
         </Link>
       </Navbar.Brand>
 
-      <Link to="/NavBar/HomePage" className="navbar-brand mt-2">
+      <Link to="/index/HomePage" className="navbar-brand mt-2">
         Home
       </Link>
-      <Link to="/NavBar/about" className="navbar-brand mt-2">
+      <Link to="/index/about" className="navbar-brand mt-2">
         About
       </Link>
       <a href="#down" className="navbar-brand mt-2">
@@ -215,10 +210,10 @@ export default function TopNavBar() {
         id="basic-nav-dropdown"
       >
         <div className="categories-container">{showCategories}</div>
-        <Link to={"/NavBar/categories"} className="see-all-link">
+        <Link to={"/index/categories"} className="see-all-link">
           See All
         </Link>
-      </NavDropdown>) : <Link to={"/NavBar/categories"} className="navbar-brand mt-2">
+      </NavDropdown>) : <Link to={"/index/categories"} className="navbar-brand mt-2">
        Categories
       </Link>}
     </Nav>
@@ -311,7 +306,7 @@ export default function TopNavBar() {
           {" "}
           <NavDropdown.Item>{isAuthExist.name}</NavDropdown.Item>
           <NavDropdown.Item>
-            <Link className="nav-link" to={"/NavBar/userDetails"}>
+            <Link className="nav-link" to={"/index/userDetails"}>
               myProfile
             </Link>
           </NavDropdown.Item>
@@ -323,7 +318,7 @@ export default function TopNavBar() {
             </NavDropdown.Item>
           )}
           <NavDropdown.Item>
-            <Link className="nav-link" to={"/NavBar/orders"}>
+            <Link className="nav-link" to={"/index/orders"}>
               orders
             </Link>
           </NavDropdown.Item>

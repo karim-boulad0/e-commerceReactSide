@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./bars.css";
+import "./css/SideBar.css";
 
 import { NavLink } from "react-router-dom";
 import { Menu } from "../../context/MenuContext";

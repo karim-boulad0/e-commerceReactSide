@@ -55,10 +55,11 @@ export default function App({ PropNotification }) {
         <Route path="/spinner" element={<Spinner />}></Route>
 
         {/* website routes */}
-        <Route path="/NavBar" element={<MainWebSiteLayout />}>
+        <Route path="/index" element={<MainWebSiteLayout />}>
           <Route path="categories" element={<SiteCategories />}></Route>
           <Route path="about" element={<About />}></Route>
           <Route path="userDetails" element={<UserDetails />}></Route>
+          <Route path="" element={<HomePage />}></Route>
           <Route path="HomePage" element={<HomePage />}></Route>
           <Route path="carts" element={<OrderItems />}></Route>
           <Route path="orders" element={<WebSiteOrders />}></Route>

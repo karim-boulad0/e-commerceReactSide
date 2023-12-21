@@ -41,7 +41,7 @@ export default function HomePage() {
       {isGet &&
         bestProducts.map((product, index) => (
           <Col key={index} xs={12} lg={3} md={4} sm={6}>
-            <Link to={`/NavBar/product/${product.id}`}>
+            <Link to={`/index/product/${product.id}`}>
               <Card>
                 {product.images.length > 0 && (
                   <Card.Img
@@ -54,7 +54,7 @@ export default function HomePage() {
                 )}
                 <Card.Body>
                   <Card.Title>{product.title}
-                  <Link to={`/NavBar/product/${product.id}`}>
+                  <Link to={`/index/product/${product.id}`}>
 
                     <FontAwesomeIcon
                       disabled
@@ -78,7 +78,7 @@ export default function HomePage() {
   );
   const ShowSixCategories = categories.map((category, index) => (
     <Col lg={3} md={4} sm={7} key={index}>
-      <Link to={`/NavBar/categoryProducts/${category.id}`}>
+      <Link to={`/index/categoryProducts/${category.id}`}>
 
         <div className="card mb-2 shadow">
 
@@ -128,7 +128,7 @@ export default function HomePage() {
         {showSlideCategories}
         <Row style={{ marginTop: "100px" }}>{ShowSixCategories}</Row>
         <div className="bg-black text-white w-100 p-3 text-center">
-          <NavLink to={"/NavBar/categories"}> See All Categories</NavLink>
+          <NavLink to={"/index/categories"}> See All Categories</NavLink>
         </div>
       </div>
       {isGet ? ShowBestProducts : ""}

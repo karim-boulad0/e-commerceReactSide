@@ -6,11 +6,10 @@ import { WindowSize } from "../../context/WindowContext";
 import { Menu } from "../../context/MenuContext";
 import { Axios } from "../../Api/Axios";
 import { USER } from "../../Api/Api";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { faDrupal } from "@fortawesome/free-brands-svg-icons";
+import { Link, useNavigate } from "react-router-dom";
 import moment from "moment";
 import { NavDropdown } from "react-bootstrap";
-
+import './css/TopBar.css'
 export default function TopBar({ setting ,PropNotification}) {
   const menu = useContext(Menu);
   const setIsOpen = menu.setIsOpen;
@@ -235,7 +234,7 @@ export default function TopBar({ setting ,PropNotification}) {
     >
       <div className="d-flex align-items-center">
         <h3 className="me-4">
-          <Link className=" E-Commerce" to="/NavBar/HomePage">
+          <Link className=" E-Commerce" to="/index/HomePage">
             <img
               src={isGetSettings && settings.logo}
               style={{

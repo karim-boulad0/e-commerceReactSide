@@ -38,7 +38,7 @@ export default function SignUp() {
         const token = data.data.access_token;
         cookie.set("e-commerce", token);
         // nav of location
-          (window.location.pathname = "/NavBar/HomePage");
+          (window.location.pathname = "/index/HomePage");
       });
     } catch (err) {
       console.log(err);

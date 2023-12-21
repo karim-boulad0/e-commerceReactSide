@@ -1,4 +1,4 @@
-import "./404.css";
+import "./css/404.css";
 export default function ForBiden4() {
   return (
     <section className="page_404">

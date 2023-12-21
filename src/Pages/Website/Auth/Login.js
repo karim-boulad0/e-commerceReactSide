@@ -38,7 +38,7 @@ export default function Login() {
         const token = data.data.token;
         cookie.set("e-commerce", token);
         data.data.user.role === "2001"
-          ? (window.location.pathname = "/NavBar/HomePage")
+          ? (window.location.pathname = "/index/HomePage")
           : (window.location.pathname = "/dashboard");
       });
     } catch (err) {
