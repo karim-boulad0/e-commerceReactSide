@@ -10,92 +10,96 @@ Make sure you have the following software installed:
 - Laravel Framework version 10.10
 - React version 18.2.0
 
-## Laravel Side
+## Installation
 
-after  Clone the repository.
-```bash 
-git clone https://github.com/karim-boulad0/e-commerceLaravelSide.git
-```
+### Laravel Side
 
-1. Install Composer dependencies:
+1. Clone the repository:
 
-    ```bash
-    composer install
-    ```
+   ```bash
+   git clone https://github.com/karim-boulad0/e-commerceLaravelSide.git
+   ```
 
-2. Run migrations and seed the database:
+2. Install Composer dependencies:
 
-    ```bash
-    php artisan migrate --seed
-    ```
+   ```bash
+   composer install
+   ```
 
-    This will create an admin account with the following credentials:
-    - Email: admin@gmail.com
-    - Password: admin123$%
+3. Run migrations and seed the database:
 
-3. Generate Passport client for personal access:
+   ```bash
+   php artisan migrate --seed
+   ```
 
-    ```bash
-    php artisan passport:client --personal
-    ```
+   This will create an admin account with the following credentials:
 
-4. Start the Laravel server:
+   - Email: admin@gmail.com
+   - Password: admin123$%
 
-    ```bash
-    php artisan serve
-    ```
+4. Generate Passport client for personal access:
 
-## React Side
+   ```bash
+   php artisan passport:client --personal
+   ```
 
-after  Clone the repository.
-```bash 
-git clone https://github.com/karim-boulad0/e-commerceReactSide.git
-```
+5. Start the Laravel server:
+   ```bash
+   php artisan serve
+   ```
 
-1. Install Node.js dependencies:
+### React Side
 
-    ```bash
-    npm install
-    ```
+1. Clone the repository:
 
-2. Start the React development server:
+   ```bash
+   git clone https://github.com/karim-boulad0/e-commerceReactSide.git
+   ```
 
-    ```bash
-    npm start
-    ```
+2. Install Node.js dependencies:
 
-3. Open [http://localhost:3000/index/homepage](http://localhost:3000/index/homepage) in your browser.
+   ```bash
+   npm install
+   ```
 
-4. Click on the "Login" button in the right side of the top bar.
+3. Start the React development server:
 
-5. Enter the following login credentials:
-    - Email: admin@gmail.com
-    - Password: admin123$%
+   ```bash
+   npm start
+   ```
+
+4. Open [http://localhost:3000/index/homepage](http://localhost:3000/index/homepage) in your browser.
+
+5. Click on the "Login" button in the right side of the top bar.
+
+6. Enter the following login credentials:
+   - Email: admin@gmail.com
+   - Password: admin123$%
 
 Now you should be able to use the application!
 
-# E-Commerce Dashboard
+## E-Commerce Dashboard
 
 Welcome to the E-Commerce Dashboard, a comprehensive solution for managing users, products, orders, and statistics.
 
-## Overview
+### Overview
 
 The E-Commerce Dashboard provides a user-friendly interface for administrators to handle various aspects of the e-commerce platform, including user management, product management, order processing, and statistical analysis.
 
-## Features
+### Features
 
-### Registration and Login
+#### Registration and Login
 
 - Users can register for an account or log in using traditional credentials.
 - Google Sign-In is available for a seamless authentication process.
 
-### User Roles
+#### User Roles
 
 - **Admin:** Has full permissions to access all dashboard features.
 - **Product Manager:** Can add and edit products.
 - **User:** Regular user role with standard functionalities.
 
-### Dashboard Pages
+#### Dashboard Pages
 
 - **User Management:** Add, edit, and delete users.
 - **Category Management:** Create, edit, and delete product categories.
@@ -104,16 +108,16 @@ The E-Commerce Dashboard provides a user-friendly interface for administrators t
 - **Statistics:** Track product quantities and sales on a monthly, yearly, and daily basis.
 - **Settings:** Manage profile information, including email, phone, etc.
 
-### Notifications
+#### Notifications
 
 - Receive notifications for new orders.
 - Track unread notifications in the top bar.
 
-### Filters
+#### Filters
 
 - Apply filters on various dashboard pages for enhanced data visibility.
 
-## Dashboard Side
+### Dashboard Side
 
 In addition to the core features, the dashboard side includes:
 
@@ -121,7 +125,6 @@ In addition to the core features, the dashboard side includes:
 - **Order Management:** Process orders, change order status, and view order details.
 - **Statistics:** Access detailed statistics on product quantities and sales.
 - **Settings:** Manage profile information and receive notifications.
-
 
 ## E-Commerce Website
 
@@ -143,3 +146,12 @@ Explore a wide range of products and enjoy a seamless shopping experience on our
 #### Contact Us (Footer)
 
 - **Email Us:** Use the contact form in the footer to send an email to the owner.
+
+## Responsive Design
+
+The E-Commerce project is designed to be responsive on all screen sizes, ensuring a seamless experience for users on various devices. The responsiveness is optimized for the following screen categories:
+
+- **lg (Large Screens)**
+- **md (Medium Screens)**
+- **sm (Small Screens)**
+- **xs (Extra Small Screens)**

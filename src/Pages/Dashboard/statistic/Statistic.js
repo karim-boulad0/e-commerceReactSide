@@ -11,7 +11,7 @@ export default function Statistic() {
         new Date()
     );
     const [selectedStatus, setSelectedStatus] = useState("delivered");
-    const [statistic, setStatistic] = useState({});
+    const [statistic, setStatistic] = useState([]);
     const [IsGet, setIsGet] = useState(false);
     const [productsAreAboutRunOut, setProductsAreAboutRunOut] = useState({});
     //   open close
@@ -27,6 +27,7 @@ export default function Statistic() {
         )
             .then((response) => {
                 setStatistic(response.data);
+
             })
             .catch((err) => console.log(err));
     }, [selectedMonthWithYear, selectedStatus]);
