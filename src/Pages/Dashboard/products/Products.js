@@ -3,7 +3,7 @@ import { PRODUCT } from "../../../Api/Api";
 import { Axios } from "../../../Api/Axios";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan, faUserPen } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faTrashCan, faUserPen } from "@fortawesome/free-solid-svg-icons";
 import { Table,Pagination } from "react-bootstrap";
 
 export default function Products() {
@@ -110,7 +110,7 @@ export default function Products() {
       {/* delete and edit of table */}
       <td className="d-flex align-items-center justify-content-around">
         <Link to={`${item.id}`}>
-          <FontAwesomeIcon icon={faUserPen} className="text-primary" />
+          <FontAwesomeIcon icon={faEdit} className="text-primary" />
         </Link>
         <FontAwesomeIcon
           cursor="pointer"

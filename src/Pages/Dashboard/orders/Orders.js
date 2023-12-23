@@ -145,12 +145,6 @@ export default function Orders() {
                   <td key={headerIndex}>{item[itemHeader.key]}</td>
                 ))}
                 <td className="d-flex justify-content-between align-items-center">
-                  <FontAwesomeIcon
-                    icon={faTrash}
-                    onClick={() => handleDeleteOpen(item.id)}
-                    className=" text-danger"
-                    cursor={"pointer"}
-                  />
                   <Link to={`${item.id}`}>
                     <FontAwesomeIcon
                       icon={faEdit}
@@ -158,6 +152,13 @@ export default function Orders() {
                       cursor={"pointer"}
                     />
                   </Link>
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    onClick={() => handleDeleteOpen(item.id)}
+                    className=" text-danger"
+                    cursor={"pointer"}
+                  />
+
                 </td>
               </tr>
             ))

@@ -1,9 +1,12 @@
 import { faProductHunt } from "@fortawesome/free-brands-svg-icons";
 import {
+  faBagShopping,
   faBarsProgress,
   faBell,
   faCaretSquareLeft,
+  faChartPie,
   faGear,
+  faLayerGroup,
   faSheetPlastic,
   faSquarePlus,
   faUserPlus,
@@ -26,7 +29,7 @@ export const NavLinks = [
   {
     name: "Categories",
     to: "/dashboard/categories",
-    icon: faBarsProgress,
+    icon: faLayerGroup,
     role: ["1995", "1999"],
   },
   {
@@ -53,7 +56,7 @@ export const NavLinks = [
   {
     name: "Orders",
     to: "orders",
-    icon: faSheetPlastic,
+    icon: faBagShopping,
     role: ["1995"],
   },
   {
@@ -66,7 +69,7 @@ export const NavLinks = [
   {
     name: "Statistic",
     to: "statistic",
-    icon: faCaretSquareLeft,
+    icon: faChartPie,
     role: ["1995"],
   },
   {
