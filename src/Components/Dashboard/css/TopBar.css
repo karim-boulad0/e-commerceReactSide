@@ -15,3 +15,7 @@
   .E-Commerce:hover {
   color:blue;
   }
+
+  .myTop *:hover {
+    color: rgb(135, 135, 211) !important;
+  }

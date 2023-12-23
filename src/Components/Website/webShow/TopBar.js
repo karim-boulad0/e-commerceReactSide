@@ -193,7 +193,6 @@ export default function TopNavBar() {
           />
         </Link>
       </Navbar.Brand>
-
       <Link to="/index/HomePage" className="navbar-brand mt-2">
         Home
       </Link>
@@ -343,7 +342,7 @@ export default function TopNavBar() {
         expand="sm"
         bg="light"
         data-bs-theme="light"
-        className="shadow-sm bg-body-tertiary fixed-top"
+        className="shadow-sm myTop bg-body-tertiary fixed-top"
       >
         <Container>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />

@@ -229,7 +229,7 @@ export default function TopBar({ setting ,PropNotification}) {
   // JSX for the entire component
   return (
     <div
-      className="top-bar shadow-sm d-flex align-items-center justify-content-between"
+      className="top-bar myTop shadow-sm d-flex align-items-center justify-content-between"
       style={{ width: Size < 400 ? "390px" : "100%" }}
     >
       <div className="d-flex align-items-center">

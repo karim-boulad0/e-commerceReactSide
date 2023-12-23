@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Spinner } from "react-bootstrap";
 import { Axios } from "../../../Api/Axios";
-
+import './Settings.css';
 export default function Settings({ updateSettings }) {
   const [settingData, setSettingData] = useState(null);
   const [icon, setIcon] = useState();

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Axios } from "../../../Api/Axios";
 import { useNavigate } from "react-router-dom";
-
+import './css/Footer.css';
 export default function Footer() {
   const [msg, setMsg] = useState("");
   const [isAuth, setIsAuth] = useState(false);
@@ -45,8 +45,8 @@ export default function Footer() {
       <Row>
         <Col md={12} className="text-center">
           <h5>Contact Us</h5>
-          <p>Email: {isGet && settings.email} </p>
-          <p>Phone:(+961){isGet && settings.phone_number} </p>
+          <p>Email: {isGet && settings.email}</p>
+          <p>Phone: (+961) {isGet && settings.phone_number}</p>
         </Col>
       </Row>
       <hr />
@@ -54,11 +54,11 @@ export default function Footer() {
         <Row id="down">
           <Col md={2}></Col>
           <Col md={2}>
-            <Button variant="primary" onClick={contactUs}>
+            <Button variant="primary" onClick={contactUs} className="contact-btn">
               Contact Us
             </Button>
           </Col>
-          <Col md={7} style={{ height: "100px" }}>
+          <Col md={7} className="form-msg">
             <Form.Group controlId="formMsg">
               <Form.Control
                 type="text"
@@ -67,21 +67,20 @@ export default function Footer() {
                 onChange={(e) => setMsg(e.target.value)}
               />
               {msg.length < 5 && isClick ? (
-                <p
-                  className="alert alert-danger mt-2"
-                  style={{ height: "40px", fontSize: "13px" }}
-                >
-                  cannot be empty and it have to be at least 5 characters
+                <p className="alert alert-danger mt-2">
+                  Cannot be empty and must be at least 5 characters
                 </p>
               ) : (
-                ""
+                ''
               )}
             </Form.Group>
           </Col>
         </Row>
       </Form>
       <hr />
-      <p className="text-center">© {isGet && settings.site_name}</p>
+      <p className="text-center footer">
+        © {isGet && settings.site_name}
+      </p>
     </Container>
   );
 }
