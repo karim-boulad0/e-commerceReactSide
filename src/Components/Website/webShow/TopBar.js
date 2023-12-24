@@ -170,7 +170,7 @@ export default function TopNavBar() {
 
   // JSX for displaying categories
   const showCategories = categories.map((category, index) => (
-    <NavDropdown.Item key={index} className="category-item">
+    <NavDropdown.Item key={index} className="category-item ">
       <Link to={`/index/categoryProducts/${category.id}`} className="category-link">
         {category.title}
       </Link>
@@ -209,9 +209,11 @@ export default function TopNavBar() {
         id="basic-nav-dropdown"
       >
         <div className="categories-container">{showCategories}</div>
-        <Link to={"/index/categories"} className="see-all-link">
+        <div className="see-all-link">
+        <Link to={"/index/categories"} >
           See All
         </Link>
+        </div>
       </NavDropdown>) : <Link to={"/index/categories"} className="navbar-brand mt-2">
        Categories
       </Link>}
