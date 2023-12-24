@@ -29,9 +29,7 @@ import About from "./Pages/Website/webShow/About";
 import Settings from "./Pages/Dashboard/settings/Settings";
 import { useState } from "react";
 import SiteCategories from "./Pages/Website/webShow/SiteCategories";
-import Test from "./Pages/Test";
 import OrderItems from "./Pages/Website/webShow/OrderItems";
-// Assuming these are your two components or modules
 import WebSiteOrders from "./Pages/Website/webShow/Orders";
 import Orders from "./Pages/Dashboard/orders/Orders";
 import Order from "./Pages/Dashboard/orders/Order";
@@ -47,8 +45,6 @@ export default function App({ PropNotification }) {
   return (
     <>
       <Routes>
-        <Route element={< Test/>} path="/test"></Route>
-        {/* <Route element={<HomePage />} path="/test"></Route> */}
         {/* global  */}
         <Route element={<ForBiden />} path="/dashboard/403"></Route>
         <Route path="/*" element={<ForBiden4 />}></Route>

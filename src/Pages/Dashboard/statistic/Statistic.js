@@ -5,6 +5,7 @@ import { Axios } from "../../../Api/Axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
+import Spinner from "../../../Components/Global/Spinner";
 
 export default function Statistic() {
     const [selectedMonthWithYear, setSelectedMonthWithYear] = useState(
@@ -40,6 +41,9 @@ export default function Statistic() {
             })
             .catch((err) => console.log(err));
     }, [selectedStatus]);
+    if(!IsGet){
+        return <Spinner/>
+    }
     return (
         <Container>
             {IsGet && (<>

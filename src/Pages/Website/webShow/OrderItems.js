@@ -65,7 +65,7 @@ const OrderItems = () => {
       </Col>
     ));
   if (!isGetOrderItems) {
-    return (<Spinner />)
+    return (<div style={{height:'100vh'}}><Spinner  /></div>)
   }
   return (
     <Container>

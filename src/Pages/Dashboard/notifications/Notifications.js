@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Axios } from "../../../Api/Axios";
-import { Alert, Container, Row, Col, Spinner } from "react-bootstrap";
+import { Alert, Container, Row, Col } from "react-bootstrap";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import Spinner from "../../../Components/Global/Spinner.js";
 
 export default function Notifications() {
     const [notifications, setNotifications] = useState(null);
     const [isGet, setIsGet] = useState(false);
- 
+
     useEffect(() => {
         Axios.get("/dashboard/admin/notification/all")
             .then((data) => {
@@ -48,7 +49,13 @@ export default function Notifications() {
     }
 
     if (!notifications) {
-        return '';
+        return <Spinner />;
+    }
+    if (isGet && notifications.length === 0) {
+        <Container className="mt-5">
+            <h1>Notifications</h1>
+            <h4> no notifications found</h4>
+        </Container>
     }
     return (
         <Container className="mt-5">

@@ -6,6 +6,7 @@ import Rating from "react-rating-stars-component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import './css/WebsiteProduct.css'
+import Spinner from "../../../Components/Global/Spinner";
 export default function WebsiteProduct() {
   const [product, setProduct] = useState({});
   const [rating, setRating] = useState("");
@@ -101,7 +102,9 @@ export default function WebsiteProduct() {
         </Card>
       </Col>
     ));
-
+if(!isGet){
+  return (<div style={{height:'100vh'}}><Spinner  /></div>)
+}
   return (
     <>
       <Container style={{ marginTop: "80px", marginBottom: "80px" }}>

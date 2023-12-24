@@ -117,7 +117,7 @@ export default function Test() {
   );
 
   if (!isGet) {
-    return (<Spinner />)
+    return (<div style={{height:'100vh'}}><Spinner  /></div>)
   }
   return (
     <>

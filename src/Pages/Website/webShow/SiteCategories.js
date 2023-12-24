@@ -2,16 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Axios } from "../../../Api/Axios.js";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
+import Spinner from "../../../Components/Global/Spinner.js";
 // import "./css/SiteCategories.css"
 export default function SiteCategories() {
   const [allCategories, setAllCategories] = useState([]);
   const [query, setQuery] = useState(""); 
+  const [isGet,setIsGet]=useState(false)
 
   // get categories using filter 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await Axios.get(`/webSite/all?filter[item]=${query}`);
+        setIsGet(true)
         setAllCategories(response.data);
       } catch (error) {
         console.error("Error fetching data: ", error);
@@ -40,7 +43,10 @@ export default function SiteCategories() {
       </NavLink>
     </Col>
   ));
+if(!isGet){
+  return (<div style={{height:'100vh'}}><Spinner  /></div>)
 
+}
   return (
     <Container>
       <h1>Categories</h1>

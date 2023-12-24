@@ -38,7 +38,7 @@ export default function CategoryProducts() {
     setSearchTerm(e.target.value);
   };
   if (!IsGet) {
-    return <Spinner />;
+    return (<div style={{height:'100vh'}}><Spinner  /></div>)
   }
   if (error) {
     return <div>Error: {error}</div>;

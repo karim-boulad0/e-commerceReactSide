@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button, Spinner } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { Axios } from "../../../Api/Axios";
 import './Settings.css';
+import Spinner from "../../../Components/Global/Spinner.js";
+
 export default function Settings({ updateSettings }) {
   const [settingData, setSettingData] = useState(null);
   const [icon, setIcon] = useState();
@@ -28,7 +30,7 @@ export default function Settings({ updateSettings }) {
 
   if (!settingData) {
     // Data is still loading, return a loading state or spinner
-    return '';
+    return <Spinner/>;
   }
 
   const handleInputChange = (e) => {

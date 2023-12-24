@@ -45,7 +45,7 @@ export default function UserDetails() {
     Axios.post("/webSite/storeDetails", form)
       .then(() => {
         setDone(true);
-        window.history.back() 
+        window.history.back()
       })
       .catch((err) => {
         console.log(err);
@@ -53,7 +53,8 @@ export default function UserDetails() {
   };
 
   if (loading) {
-    return <Spinner />;
+    return (<div style={{ height: '100vh' }}><Spinner /></div>)
+
   }
 
   return (
