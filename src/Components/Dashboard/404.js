@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./css/404.css";
 export default function ForBiden4() {
   return (
@@ -12,9 +13,9 @@ export default function ForBiden4() {
               <div className="contant_box_404">
                 <h3 className="h2">Look like you're lost</h3>
                 <p>the page you are looking for not avaible!</p>
-                <a href className="link_404">
+                <Link href className="link_404" to={'/index/homepage'}>
                   Go to Home
-                </a>
+                </Link>
               </div>
             </div>
           </div>

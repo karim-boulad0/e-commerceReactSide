@@ -114,7 +114,7 @@ export default function CategoryProducts() {
         className="container"
         style={{ marginTop: "80px", marginBottom: "80px" }}
       >
-        <h1>{categoryTitle}</h1>
+        <h1>Category : {categoryTitle}</h1>
         {/* Search Input */}
         <input
           type="text"

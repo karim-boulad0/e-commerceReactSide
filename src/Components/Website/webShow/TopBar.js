@@ -291,9 +291,10 @@ export default function TopNavBar() {
       )}
 
       {!isAuthExist ? (
-        <Link className="btn btn-primary me-3" to="/login">
-          Login
-        </Link>
+      <Link className="btn btn-primary me-3" to="/login">
+     Login
+   </Link>
+ 
       ) : (
         //  user details logout and  ...
         <NavDropdown

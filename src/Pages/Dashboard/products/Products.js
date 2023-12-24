@@ -4,7 +4,7 @@ import { Axios } from "../../../Api/Axios";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashCan, faUserPen } from "@fortawesome/free-solid-svg-icons";
-import { Table,Pagination } from "react-bootstrap";
+import { Table, Pagination } from "react-bootstrap";
 
 export default function Products() {
   const [data, setData] = useState([]);
@@ -56,18 +56,22 @@ export default function Products() {
       name: "About",
     },
     {
+      key: "image",
+      name: "image",
+    },
+    {
       key: "quantity",
       name: "quantity",
     },
   ];
-// pagination handle
+  // pagination handle
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10; // Set the number of items per page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentData = data.slice(indexOfFirstItem, indexOfLastItem);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-// pagination handle
+  // pagination handle
 
   // query
   const [query, setQuery] = useState("");
@@ -103,7 +107,7 @@ export default function Products() {
         const i = item2.key;
         return (
           <td key={index}>
-            {item2.key === "category" ? item[i].title : item[i]}
+            {item2.key === "category" ? item[i].title : item2.key === 'image' ? <img src={item[i]} alt={item[i]} style={{ width: "60px", height: '60px' }} /> : item[i]}
           </td>
         );
       })}
@@ -155,9 +159,7 @@ export default function Products() {
             onChange={(e) => setQuery(e.target.value)}
           />
         </div>
-        {/* <button className="btn btn-primary mb-3" onClick={handleSearch}>
-          Search
-        </button> */}
+
       </div>
       <div className="d-flex align-items-center justify-content-between">
         <h1>Products</h1>
@@ -177,8 +179,8 @@ export default function Products() {
           {Data.length === 0 && !isGet
             ? tr
             : Data.length === 0 && isGet
-            ? trTwo
-            : Data}
+              ? trTwo
+              : Data}
         </tbody>
       </Table>
       <Pagination>

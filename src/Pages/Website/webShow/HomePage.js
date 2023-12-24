@@ -10,18 +10,20 @@ export default function Test() {
   const [categories, setCategories] = useState([]);
   const [bestProducts, setBestProducts] = useState();
   const [isGet, setIsGet] = useState(false);
+  const [query, setQuery] = useState('');
+
   // get categories
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await Axios.get("/webSite/categories");
+        const response = await Axios.get(`/webSite/categories?filter[item]=${query}`);
         setCategories(response.data);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
     };
     fetchData();
-  }, []);
+  }, [query]);
   // get best products
   useEffect(() => {
     const fetchData = async () => {
@@ -127,10 +129,21 @@ export default function Test() {
           <h1>Welcome to Our E-Commerce Store!</h1>
         </header>
         {showSlideCategories}
-        <div className="categories-link">
+        <div className="categories-link categories-link" >
           <Link to={"/index/categories"} >Categories</Link>
         </div>
-        <Row style={{ marginTop: "100px" }}>{ShowCategories}</Row>
+        <div className="mt-2">
+          <input
+            type="text"
+            className="form-control w-75 "
+            placeholder="Search categories..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </div>
+        <Row style={{ marginTop: "40px" }}>
+    
+          {ShowCategories}</Row>
 
         <h5 className="title text-white mt-4" >Best Products</h5>
         {isGet ? ShowBestProducts : ""}

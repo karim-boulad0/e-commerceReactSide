@@ -28,7 +28,7 @@ export default function Settings({ updateSettings }) {
 
   if (!settingData) {
     // Data is still loading, return a loading state or spinner
-    return <Spinner/>;
+    return '';
   }
 
   const handleInputChange = (e) => {

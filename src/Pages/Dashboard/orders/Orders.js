@@ -142,8 +142,10 @@ export default function Orders() {
               <tr key={index}>
                 <td>{index + 1}</td>
                 {Header.map((itemHeader, headerIndex) => (
-                  <td key={headerIndex}>{item[itemHeader.key]}</td>
-                ))}
+                  itemHeader.key !== 'totalPrice' ? (
+                    <td key={headerIndex}>{item[itemHeader.key]}</td>) :
+                    (<td key={headerIndex}>{Number(item[itemHeader.key]).toFixed(1)}</td>))
+                )}
                 <td className="d-flex justify-content-between align-items-center">
                   <Link to={`${item.id}`}>
                     <FontAwesomeIcon
