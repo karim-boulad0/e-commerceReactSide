@@ -3,7 +3,7 @@ import { PRODUCT } from "../../../Api/Api";
 import { Axios } from "../../../Api/Axios";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrashCan, faUserPen } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { Table, Pagination } from "react-bootstrap";
 
 export default function Products() {

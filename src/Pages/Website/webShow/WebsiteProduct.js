@@ -1,7 +1,7 @@
 import { Axios } from "../../../Api/Axios";
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { Card, Col, Container, Row, Modal, Button } from "react-bootstrap";
+import { Card, Col, Container, Row } from "react-bootstrap";
 import Rating from "react-rating-stars-component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";

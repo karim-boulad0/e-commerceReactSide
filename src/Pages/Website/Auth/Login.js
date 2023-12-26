@@ -1,10 +1,12 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { LOGIN, baseUrl } from "../../../Api/Api";
 import axios from "axios";
-import Header from "../../../Components/Website/Header";
+import Header from "../../../Components/Website/Auth/Header";
 import Cookie from "cookie-universal";
 import Form from "react-bootstrap/Form";
 import { WindowSize } from "../../../context/WindowContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 export default function Login() {
   const [err, setErr] = useState("");
@@ -12,6 +14,7 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const [isShow, setIsShow] = useState(false)
   const [accept, setAccept] = useState(false);
 
   const Focus = useRef(null);
@@ -62,9 +65,9 @@ export default function Login() {
           className="login container   mt-5 p-5   shadow-lg p-3 mb-5 bg-body rounded"
           style={{ width: Size < 600 ? "90%" : "50%" }}
         >
-          <form className="" onSubmit={submit}>
+          <Form className="" onSubmit={submit}>
             {/* email */}
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3 ">
               <Form.Label htmlFor="email" className="form-label">
                 Email
               </Form.Label>
@@ -79,19 +82,27 @@ export default function Login() {
               />
             </Form.Group>
             {/* password */}
-            <Form.Group className="mb-3">
-              <Form.Label htmlFor="pass" className="form-label">
+            <Form.Group className="mb-3 pass-group">
+              <Form.Label htmlFor="pass" className="form-label pass-label">
                 Password
               </Form.Label>
               <Form.Control
+              className="pass-input"
                 name="password"
-                type="password"
+                type={isShow ? "text" : 'password'}
                 id="pass"
                 placeholder="Password"
                 onChange={handleForFormChange}
                 value={form.password}
               />
+
+              <FontAwesomeIcon
+                onClick={() => setIsShow((prev) => !prev)}
+                className="pass-icon"
+                icon={isShow ? faEyeSlash : faEye}
+              />
             </Form.Group>
+
             {err && accept ? (
               <p className="errMsg">wrong email or password</p>
             ) : null}
@@ -114,7 +125,7 @@ export default function Login() {
                 </div>
               </a>
             </div>
-          </form>
+          </Form>
         </div>
       </div>
     </>

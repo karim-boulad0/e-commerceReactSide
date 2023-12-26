@@ -134,7 +134,7 @@ body{
     align-items: center;
     text-align: center;
     width: 100%; /* Set a fixed width for the carousel item */
-    height: 400px; /* Set a fixed height for the carousel item */
+    height: 520px; /* Set a fixed height for the carousel item */
   }
   
   .carousel-image {

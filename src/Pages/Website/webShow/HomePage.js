@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Axios } from "../../../Api/Axios.js";
 import { Col, Row, Carousel, Card } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import './css/HomePage.css'

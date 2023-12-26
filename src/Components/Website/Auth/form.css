@@ -27,3 +27,16 @@
     cursor: pointer;
   }
 
+
+  .pass-group {
+    position: relative;
+  }
+  
+  .pass-icon {
+    position: absolute;
+    top: 51px;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  

@@ -1,28 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Axios } from "../../../Api/Axios.js";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Pagination, Row } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import Spinner from "../../../Components/Global/Spinner.js";
 // import "./css/SiteCategories.css"
 export default function SiteCategories() {
   const [allCategories, setAllCategories] = useState([]);
-  const [query, setQuery] = useState(""); 
-  const [isGet,setIsGet]=useState(false)
-
-  // get categories using filter 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await Axios.get(`/webSite/all?filter[item]=${query}`);
-        setIsGet(true)
-        setAllCategories(response.data);
-      } catch (error) {
-        console.error("Error fetching data: ", error);
-      }
-    };
-    fetchData();
-  }, [query]);
-  
+  const [query, setQuery] = useState("");
+  const [isGet, setIsGet] = useState(false)
   // show
   const ShowCategories = allCategories.map((category) => (
     <Col lg={3} md={3} sm={4} xs={12} key={category.id}>
@@ -43,10 +28,33 @@ export default function SiteCategories() {
       </NavLink>
     </Col>
   ));
-if(!isGet){
-  return (<div style={{height:'100vh'}}><Spinner  /></div>)
+  // pagination 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 25; // Set the number of items per page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentData = ShowCategories.slice(indexOfFirstItem, indexOfLastItem);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  // pagination 
+  // get categories using filter 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await Axios.get(`/webSite/all?filter[item]=${query}`);
+        setIsGet(true)
+        setAllCategories(response.data);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+    fetchData();
+  }, [query]);
 
-}
+
+  if (!isGet) {
+    return (<div style={{ height: '100vh' }}><Spinner /></div>)
+
+  }
   return (
     <Container>
       <h1>Categories</h1>
@@ -57,7 +65,20 @@ if(!isGet){
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
-      <Row>{ShowCategories}</Row>
+      <Row>{currentData}</Row>
+      <Pagination>
+        {[...Array(Math.ceil(allCategories.length / itemsPerPage)).keys()].map(
+          (number) => (
+            <Pagination.Item
+              key={number + 1}
+              active={number + 1 === currentPage}
+              onClick={() => paginate(number + 1)}
+            >
+              {number + 1}
+            </Pagination.Item>
+          )
+        )}
+      </Pagination>
     </Container>
   );
 }

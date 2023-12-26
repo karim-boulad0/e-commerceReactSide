@@ -109,7 +109,6 @@
   }
 
   .categories-container{
-    background-color: rgb(243, 233, 233);
     color:white;
     overflow: scroll;
     overflow-x: hidden;
@@ -117,10 +116,6 @@
   .category-link{
     display: block;
     padding: 3px;
+    color:black;
   }
-  .see-all-link{
-    text-align: center;
-    background-color: #111;
-    padding: 5px;
-    display: block;
-  }
+ 

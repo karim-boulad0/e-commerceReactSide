@@ -209,13 +209,18 @@ export default function TopNavBar() {
         id="basic-nav-dropdown"
       >
         <div className="categories-container">{showCategories}</div>
-        <div className="see-all-link">
-        <Link to={"/index/categories"} >
+        {/* <div >
+        <Link to={"/index/categories"}className="bg-white" >
           See All
         </Link>
+        </div> */}
+        <div className="bg-dark text-white p-2 text-center">
+          <Link to={"/index/categories"} className="d-block w-100 ">
+            See All
+          </Link>
         </div>
       </NavDropdown>) : <Link to={"/index/categories"} className="navbar-brand mt-2">
-       Categories
+        Categories
       </Link>}
     </Nav>
   );
@@ -293,10 +298,10 @@ export default function TopNavBar() {
       )}
 
       {!isAuthExist ? (
-      <Link className="btn btn-primary me-3" to="/login">
-     Login
-   </Link>
- 
+        <Link className="btn btn-primary me-3" to="/login">
+          Login
+        </Link>
+
       ) : (
         //  user details logout and  ...
         <NavDropdown

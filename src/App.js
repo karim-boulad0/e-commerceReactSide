@@ -11,7 +11,7 @@ import Users from "./Pages/Dashboard/users/Users";
 import User from "./Pages/Dashboard/users/User";
 import AddUser from "./Pages/Dashboard/users/AddUser";
 import ForBiden from "./Components/Dashboard/403";
-import ForBiden4 from "./Components/Dashboard/404";
+import ForBiden4 from "./Components/Global/404";
 import RequireBack from "./Pages/Website/Auth/RequireBack";
 import Categories from "./Pages/Dashboard/Categories/Categories";
 import AddCategory from "./Pages/Dashboard/Categories/AddCategory";

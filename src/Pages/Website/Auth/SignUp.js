@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
 import { REGISTER, baseUrl } from "../../../Api/Api";
-import Header from "../../../Components/Website/Header";
+import Header from "../../../Components/Website/Auth/Header";
 import Cookie from "cookie-universal";
 import Form from "react-bootstrap/Form";
 import { WindowSize } from "../../../context/WindowContext";
