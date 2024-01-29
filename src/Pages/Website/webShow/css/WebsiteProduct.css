@@ -1,0 +1,30 @@
+/* WebsiteProduct.css */
+
+/* External CSS styles for the product images */
+.product-image {
+    width: 250px;
+    margin: 5px;
+  }
+  
+  .product-image img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  .custom-card {
+    border: 1px solid #ddd; /* Add border for better visibility */
+  }
+  
+  .card-image {
+    height: 300px; /* Adjust the height as needed */
+    object-fit: cover; /* Ensure the image covers the entire container */
+  }
+  
+  .quantity-input {
+    /* Add styles for the quantity input */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  

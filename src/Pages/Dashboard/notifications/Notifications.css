@@ -1,0 +1,41 @@
+/* styles.css */
+
+
+  
+  h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  .alert {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .alert:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .alert.unread {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+  }
+  
+  .alert .alert-heading {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .alert p {
+    margin: 5px 0;
+  }
+  
+  .no-notifications {
+    margin-top: 20px;
+    font-size: 18px;
+  }
+  

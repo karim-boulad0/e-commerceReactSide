@@ -1,0 +1,21 @@
+/* top bar */
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 900px;
+    height: 70px;
+    background-color: white;
+    padding: 0 20px;
+    z-index: 2;
+  }
+  .E-Commerce {
+  color:black;
+  }
+  .E-Commerce:hover {
+  color:blue;
+  }
+
+  .myTop *:hover {
+    color: rgb(135, 135, 211) !important;
+  }

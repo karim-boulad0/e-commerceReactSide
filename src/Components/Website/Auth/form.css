@@ -1,0 +1,42 @@
+.errMsg{
+    color: red;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+    margin-top: 0;
+    padding-top: 0;
+}
+.d-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:100vh
+  }
+
+  .login,.register{
+  background-image: linear-gradient(110deg, white 0%, white 50%, rgb(228, 220, 220) 50%);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  border-radius: 12px;
+  height:600px
+  }
+
+  .form-label{
+    cursor: pointer;
+  }
+
+
+  .pass-group {
+    position: relative;
+  }
+  
+  .pass-icon {
+    position: absolute;
+    top: 51px;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  
